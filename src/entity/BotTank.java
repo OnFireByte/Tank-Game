@@ -3,7 +3,9 @@ package entity;
 import java.util.concurrent.ThreadLocalRandom;
 
 import common.Direction;
+import javafx.scene.image.Image;
 import logic.GameController;
+import sharedObject.RenderableHolder;
 
 public class BotTank extends Tank {
     private boolean isAlive;
@@ -17,6 +19,8 @@ public class BotTank extends Tank {
         isBlocked = false;
         calculateNextDirectionCoolDown = ThreadLocalRandom.current().nextInt(30, 60);
         calculateNextDirectionCoolDownCounter = 0;
+        sprite = RenderableHolder.Tank2;
+
     }
 
     public BotTank(float x, float y, float speed, Direction direction) {
@@ -25,6 +29,7 @@ public class BotTank extends Tank {
         isBlocked = false;
         calculateNextDirectionCoolDown = ThreadLocalRandom.current().nextInt(30, 60);
         calculateNextDirectionCoolDownCounter = 0;
+        sprite = RenderableHolder.Tank2;
 
     }
 

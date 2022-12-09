@@ -4,6 +4,7 @@ import common.Direction;
 import entity.base.MovableEntity;
 import entity.interfaces.Hittable;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
 import logic.GameController;
@@ -15,6 +16,7 @@ public abstract class Tank extends MovableEntity implements Hittable {
     protected boolean isPlayerSide;
     protected int shootCoolDown;
     protected int shootCoolDownCounter;
+    protected Image sprite;
 
     public boolean isPlayerSide() {
         return isPlayerSide;
@@ -27,6 +29,7 @@ public abstract class Tank extends MovableEntity implements Hittable {
         shootCoolDownCounter = 0;
         this.speed = speed;
         GameController.getInstance().getTanks().add(this);
+        sprite = RenderableHolder.Tank1;
 
     }
 
@@ -36,6 +39,7 @@ public abstract class Tank extends MovableEntity implements Hittable {
         this.isPlayerSide = isPlayerSide;
         shootCoolDown = 30;
         shootCoolDownCounter = 0;
+        sprite = RenderableHolder.Tank1;
     }
 
     @Override
@@ -72,28 +76,32 @@ public abstract class Tank extends MovableEntity implements Hittable {
     }
 
     public void draw(GraphicsContext gc, boolean isHitted) {
-    	gc.drawImage(RenderableHolder.Tank1, x - width / 2, y - height / 2, width, height);
-        //gc.setFill(isHitted ? Color.RED : Color.BLUE);
-        //gc.fillRect(x - width / 2, y - height / 2, width, height);
-        gc.setFill(Color.WHITE);
+        gc.save();
+        gc.translate(x, y);
         switch (direction) {
             case UP:
-                gc.fillRect(x - 2, y - 16, 4, 4);
+                gc.rotate(0);
                 break;
 
             case DOWN:
-                gc.fillRect(x - 2, y + 14, 4, 4);
+                gc.rotate(180);
+
                 break;
             case LEFT:
-                gc.fillRect(x - 16, y - 2, 4, 4);
+                gc.rotate(270);
+
                 break;
             case RIGHT:
-                gc.fillRect(x + 14, y - 2, 4, 4);
+                gc.rotate(90);
+
                 break;
 
             default:
                 break;
         }
+        gc.drawImage(isHitted ? RenderableHolder.Tank1Hit : sprite, -width / 2, -height / 2, width,
+                height);
+        gc.restore();
 
     }
 

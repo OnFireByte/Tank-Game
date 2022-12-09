@@ -20,7 +20,7 @@ public class GameController {
     private ConcurrentLinkedQueue<Wall> walls = new ConcurrentLinkedQueue<>();
 
     private Tank player;
-    private static int maxEnemy = 10;
+    private static int maxEnemy = 20;
 
     public ConcurrentLinkedQueue<Wall> getWalls() {
         return walls;
@@ -100,24 +100,24 @@ public class GameController {
     }
 
     public void run() {
-        for (int i = 0; i < 50; i++) {
-            new Wall(i * 20 + 10, 10, 20);
-            new Wall(i * 20 + 10, AppConstant.APP_HEIGHT - 10, 20);
+        for (int i = 0; i < 40; i++) {
+            new Wall(i * 25 + 10, 10, 25);
+            new Wall(i * 25 + 10, AppConstant.APP_HEIGHT - 10, 25);
         }
-        for (int i = 0; i < 30; i++) {
-            new Wall(10, i * 20 + 10, 20);
-            new Wall(AppConstant.APP_WIDTH - 10, i * 20 + 10, 20);
+        for (int i = 0; i < 24; i++) {
+            new Wall(10, i * 25 + 10, 25);
+            new Wall(AppConstant.APP_WIDTH - 10, i * 25 + 10, 25);
         }
 
         for (int i = 0; i < 10; i++) {
             for (int j = 1; j < 10; j++) {
-                new BreakableWall(160 * j, i * 20 + 80, 20);
+                new BreakableWall(160 * j, i * 25 + 80, 25);
             }
         }
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 8; i++) {
             for (int j = 1; j < 10; j++) {
-                new BreakableWall(160 * j, i * 20 + 500, 20);
+                new BreakableWall(160 * j, i * 25 + 400, 25);
             }
         }
         player = new PlayerTank(50, 50, Direction.RIGHT);
