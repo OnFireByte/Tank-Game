@@ -5,6 +5,7 @@ import entity.base.BaseEntity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.GameController;
+import sharedObject.RenderableHolder;
 
 public class Wall extends BaseEntity implements Updatable {
 
@@ -23,8 +24,9 @@ public class Wall extends BaseEntity implements Updatable {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.setFill(Color.YELLOW);
-        gc.fillRect(x - size / 2, y - size / 2, size, size);
+    	gc.drawImage(RenderableHolder.Wall1, x - size / 2, y - size / 2, size, size);
+        //gc.setFill(Color.YELLOW);
+        //gc.fillRect(x - size / 2, y - size / 2, size, size);
 
     }
 

@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Pair;
 import logic.GameController;
 import logic.GameLogic;
+import sharedObject.RenderableHolder;
 
 public abstract class Tank extends MovableEntity implements Hittable {
 
@@ -71,9 +72,9 @@ public abstract class Tank extends MovableEntity implements Hittable {
     }
 
     public void draw(GraphicsContext gc, boolean isHitted) {
-
-        gc.setFill(isHitted ? Color.RED : Color.BLUE);
-        gc.fillRect(x - width / 2, y - height / 2, width, height);
+    	gc.drawImage(RenderableHolder.Tank1, x - width / 2, y - height / 2, width, height);
+        //gc.setFill(isHitted ? Color.RED : Color.BLUE);
+        //gc.fillRect(x - width / 2, y - height / 2, width, height);
         gc.setFill(Color.WHITE);
         switch (direction) {
             case UP:

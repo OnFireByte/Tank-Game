@@ -23,9 +23,12 @@ public class RenderableHolder {
 	//audio
 	public static AudioClip clickSound;
 	public static AudioClip mainMenuMusic;
+	
 	//image
 	public static Image test;
-	
+	public static Image Wall1;
+	public static Image Tank1;
+	public static Image Tank2;
 	
 	//font
 	public static Font buttonFont;
@@ -67,7 +70,7 @@ public class RenderableHolder {
 	}
 	
 	public static void loadResource() {
-		String image = "image/";
+		String image = "images/";
 		String sound = "sound/";
 		String font = "font/";
 		
@@ -76,8 +79,11 @@ public class RenderableHolder {
 		iconGif = new Image(ClassLoader.getSystemResource( image + "tank.gif").toString() );
 		
 		
-		//character image
+		//image
 		test = new Image(ClassLoader.getSystemResource( image + "test.jpg").toString() , 700 ,500 ,false ,false);
+		Wall1 = new Image(ClassLoader.getSystemResource( image + "Wall1.jpg").toString() );
+		Tank1 = new Image(ClassLoader.getSystemResource( image + "Tank1.gif").toString() );
+		Tank2 = new Image(ClassLoader.getSystemResource( image + "Tank2.gif").toString() );
 		
 		//audio
 		clickSound = new AudioClip(ClassLoader.getSystemResource(sound + "soundclick.mp3").toString());
