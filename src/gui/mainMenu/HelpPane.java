@@ -1,4 +1,4 @@
-package gui;
+package gui.mainMenu;
 
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;

@@ -5,9 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 
-public class ButtonBase extends Button{
+public class BaseButton extends Button{
 	
-	public ButtonBase(String name) {
+	public BaseButton(String name) {
 		
 		super(name);
 		this.setPrefHeight(50);
