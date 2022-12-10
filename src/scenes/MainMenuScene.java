@@ -13,6 +13,7 @@ import sharedObject.RenderableHolder;
 public class MainMenuScene extends Scene {
 
 	private StackPane root;
+	public static AnimationTimer mainMenuMusic;
 
 	public MainMenuScene() {
 
@@ -24,16 +25,15 @@ public class MainMenuScene extends Scene {
 		HelpPane help = new HelpPane();
 		ButtonPane btn = new ButtonPane(help);
 
-		AnimationTimer music = new AnimationTimer() {
+		mainMenuMusic = new AnimationTimer() {
 			@Override
 			public void handle(long arg0) {
 				if (!RenderableHolder.mainMenuMusic.isPlaying()) {
-					// RenderableHolder.mainMenuMusic.play();
+					RenderableHolder.mainMenuMusic.play();
 				}
 			}
 		};
-
-		music.start();
+		mainMenuMusic.start();
 
 		root.getChildren().addAll(btn, help);
 	}

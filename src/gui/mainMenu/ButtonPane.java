@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import logic.GameController;
+import scenes.MainMenuScene;
 import sharedObject.RenderableHolder;
 import sharedObject.SceneManager;
 
@@ -55,7 +56,8 @@ public class ButtonPane extends VBox {
 
 				SceneManager.getInstance().setToMainGame();
 				GameController.getInstance().setGameRunning(true);
-
+				RenderableHolder.mainMenuMusic.stop();
+				MainMenuScene.mainMenuMusic.stop();
 			}
 		});
 	}
