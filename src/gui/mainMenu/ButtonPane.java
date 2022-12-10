@@ -4,8 +4,12 @@ import gui.BaseButton;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GameController;
 import scenes.MainMenuScene;
@@ -29,10 +33,16 @@ public class ButtonPane extends VBox {
 		this.helpPane = helpPane;
 
 		// Name
-		Text txt = new Text("Tank Game");
-		txt.setFont(RenderableHolder.buttonFont);
-		txt.setTabSize(50);
+		Button txt = new Button("Tank Game");
+		txt.setFont(RenderableHolder.getFont(20));
+		ImageView t = new ImageView(RenderableHolder.TxtFrame);
+		txt.setBackground(null);
+		txt.setPadding(Insets.EMPTY);
+		txt.setContentDisplay(ContentDisplay.CENTER);
+		txt.setGraphic(t);
 
+		txt.setFont(RenderableHolder.getFont(40));
+		
 		// play button
 		initializeStartButton();
 
@@ -46,9 +56,8 @@ public class ButtonPane extends VBox {
 	}
 
 	public void initializeStartButton() {
-		startButton = new BaseButton("Play");
+		startButton = new BaseButton("Play" , 190 , 50);		
 		startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
 			@Override
 			public void handle(MouseEvent arg0) {
 				// play audio click
@@ -63,7 +72,8 @@ public class ButtonPane extends VBox {
 	}
 
 	public void initializeHelpButton() {
-		helpButton = new BaseButton("Help");
+		
+		helpButton = new BaseButton("Help" , 190 , 50);
 		helpButton.setOnMouseClicked(arg0 -> {
 			RenderableHolder.clickSound.play();
 			helpPane.showHelpPane();
@@ -71,7 +81,8 @@ public class ButtonPane extends VBox {
 	}
 
 	public void initializeExitButton() {
-		exitButton = new BaseButton("Exit");
+		exitButton = new BaseButton("Exit" , 190 , 50);
+		
 		exitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
