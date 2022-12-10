@@ -5,9 +5,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import common.Constant;
 import common.Direction;
 import entity.base.Tank;
+import javafx.scene.Scene;
 import logic.GameController;
 import logic.GameLogic;
 import logic.InputUtil;
+import sharedObject.SceneManager;
 
 public class PlayerTank extends Tank {
 
@@ -53,22 +55,8 @@ public class PlayerTank extends Tank {
     }
 
     private void upgrade() {
-        switch (ThreadLocalRandom.current().nextInt(4)) {
-            case 0:
-                addMaxHpLevel(1);
-                break;
-            case 1:
-                addSpeedLevel(1);
-                break;
-            case 2:
-                addShootCoolDownLevel(1);
-                break;
-            case 3:
-                addSizeLevel(1);
-                break;
-            default:
-                break;
-        }
+        SceneManager.getInstance().openUpgradeModal();
+
     }
 
     @Override
@@ -82,6 +70,8 @@ public class PlayerTank extends Tank {
 
     @Override
     public void kill() {
+        super.kill();
+        SceneManager.getInstance().openEndGameModal();
     }
 
     public int getMaxHpLevel() {
@@ -155,6 +145,10 @@ public class PlayerTank extends Tank {
 
     public void addSizeLevel(int level) {
         setSizeLevel(sizeLevel + level);
+    }
+
+    public void heal() {
+        hp = maxHp;
     }
 
 }

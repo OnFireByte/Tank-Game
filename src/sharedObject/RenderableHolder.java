@@ -31,8 +31,7 @@ public class RenderableHolder {
 	public static Image Tank1Hit;
 	public static Image Tank2;
 	public static Image TankExplosion;
-	
-	
+
 	// font
 	public static Font buttonFont;
 
@@ -89,13 +88,13 @@ public class RenderableHolder {
 		Tank1Hit = new Image(ClassLoader.getSystemResource(image + "Tank1hit.png").toString());
 		Tank2 = new Image(ClassLoader.getSystemResource(image + "Tank2.gif").toString());
 		TankExplosion = new Image(ClassLoader.getSystemResource(image + "explosion.gif").toString());
-		
+
 		// audio
 		clickSound = new AudioClip(ClassLoader.getSystemResource(sound + "soundclick.mp3").toString());
 		mainMenuMusic = new AudioClip(ClassLoader.getSystemResource(sound + "mainmenu_music.mp3").toString());
 		ShootSound = new AudioClip(ClassLoader.getSystemResource(sound + "Shoot.mp3").toString());
 		ExplosionSound = new AudioClip(ClassLoader.getSystemResource(sound + "Explode.mp3").toString());
-		
+
 		// font
 		buttonFont = Font.loadFont(ClassLoader.getSystemResource(font + "8bit.ttf").toString(), 100);
 

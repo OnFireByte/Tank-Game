@@ -15,6 +15,7 @@ public abstract class Tank extends MovableEntity implements Hittable {
 
     protected int hitFrame = 15;
     protected int hitCounter = 0;
+    protected int bulletSpeed = 10;
     protected boolean isAlive;
     protected boolean isPlayerSide;
     protected int shootCoolDown;
@@ -209,7 +210,7 @@ public abstract class Tank extends MovableEntity implements Hittable {
             return;
         }
         Pair<Float, Float> pair = getFacePos();
-        new Bullet(pair.getKey(), pair.getValue(), 10, direction, isPlayerSide);
+        new Bullet(pair.getKey(), pair.getValue(), bulletSpeed, direction, isPlayerSide);
 
         shootCoolDownCounter = shootCoolDown;
     }

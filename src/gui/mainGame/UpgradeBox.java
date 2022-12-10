@@ -12,35 +12,56 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import sharedObject.RenderableHolder;
 
 public class UpgradeBox extends VBox {
 
     private Text levelText;
 
-    public UpgradeBox(String name, Image icon, int level, int maxLevel) {
+    private Color bgColor = Color.LIGHTGRAY;
+    private Color bgHoverColor = Color.GRAY;
+
+    public UpgradeBox(String name, String desc, Image icon, int level, int maxLevel) {
         super();
         setPadding(new Insets(10));
         setAlignment(Pos.CENTER);
-        setSpacing(10);
+        setSpacing(20);
         setMaxWidth(100);
-        setBackground(new Background(new BackgroundFill(Color.GRAY, null, getInsets())));
+        setMaxHeight(250);
+        setPrefHeight(275);
+        setBackground(new Background(new BackgroundFill(bgColor, null, getInsets())));
 
         ImageView iconView = new ImageView(icon);
-        iconView.setFitWidth(75);
-        iconView.setFitHeight(75);
+        iconView.setFitWidth(50);
+        iconView.setFitHeight(50);
 
         Text title = new Text(name);
         title.setFont(RenderableHolder.getFont(18));
 
-        levelText = new Text("Level " + level + "/" + maxLevel);
-        levelText.setFont(RenderableHolder.getFont(18));
+        Text descText = new Text(desc);
+        descText.setFont(RenderableHolder.getFont(8));
+        descText.setWrappingWidth(200);
+        descText.setLineSpacing(12);
+        descText.setTextAlignment(TextAlignment.CENTER);
 
-        getChildren().addAll(iconView, title, levelText);
+        levelText = new Text(maxLevel == 0 ? "" : "Level " + level + "/" + maxLevel);
+        levelText.setFont(RenderableHolder.getFont(14));
+
+        getChildren().addAll(iconView, title, levelText, descText);
+
+        setOnMouseEntered(e -> {
+            setBackground(new Background(new BackgroundFill(bgHoverColor, null, getInsets())));
+        });
+
+        setOnMouseExited(e -> {
+            setBackground(new Background(new BackgroundFill(bgColor, null, getInsets())));
+        });
+
     }
 
     public void update(int level, int maxLevel) {
-        levelText.setText("Level " + level + "/" + maxLevel);
+        levelText.setText(maxLevel == 0 ? "" : "Level " + level + "/" + maxLevel);
 
     }
 }

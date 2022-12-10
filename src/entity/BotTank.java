@@ -4,6 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import common.Direction;
 import entity.base.Tank;
+import javafx.util.Pair;
 import logic.GameController;
 import sharedObject.RenderableHolder;
 
@@ -19,6 +20,7 @@ public class BotTank extends Tank {
         calculateNextDirectionCoolDown = ThreadLocalRandom.current().nextInt(30, 60);
         calculateNextDirectionCoolDownCounter = 0;
         sprite = RenderableHolder.Tank2;
+        bulletSpeed = 5;
 
     }
 
@@ -29,6 +31,7 @@ public class BotTank extends Tank {
         calculateNextDirectionCoolDown = ThreadLocalRandom.current().nextInt(30, 60);
         calculateNextDirectionCoolDownCounter = 0;
         sprite = RenderableHolder.Tank2;
+        bulletSpeed = 5;
 
     }
 
@@ -43,7 +46,7 @@ public class BotTank extends Tank {
     @Override
     protected boolean shootInput() {
 
-        return ThreadLocalRandom.current().nextInt(0, 100) == 0;
+        return ThreadLocalRandom.current().nextInt(0, 200) == 0;
     }
 
     @Override
@@ -98,8 +101,8 @@ public class BotTank extends Tank {
     @Override
     public void kill() {
         GameController.addPlayerScore(1);
-        new Upgrader(getX(), getY());
         if (ThreadLocalRandom.current().nextInt(0, 10) == 0) {
+            new Upgrader(getX(), getY());
         }
 
         super.kill();

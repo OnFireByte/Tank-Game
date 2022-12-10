@@ -47,4 +47,19 @@ public class SceneManager {
         GameController.getInstance().setGameRunning(true);
     }
 
+    public void openUpgradeModal() {
+        mainGameScene.openUpgradeModal();
+
+    }
+
+    public void closeUpgradeModal() {
+        mainGameScene.closeUpgradeModal();
+
+    }
+
+    public void openEndGameModal() {
+        mainGameScene.openEndGameModal();
+
+    }
+
 }

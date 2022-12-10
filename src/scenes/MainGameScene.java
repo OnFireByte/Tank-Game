@@ -1,6 +1,7 @@
 package scenes;
 
 import common.Constant;
+import gui.mainGame.EndGameModal;
 import gui.mainGame.GameMenu;
 import gui.mainGame.UpgradeModal;
 import javafx.animation.AnimationTimer;
@@ -16,6 +17,8 @@ import logic.InputUtil;
 
 public class MainGameScene extends Scene {
 	boolean isEscHold;
+	UpgradeModal upgradeModal;
+	EndGameModal endGameModal;
 
 	public MainGameScene() {
 
@@ -31,8 +34,9 @@ public class MainGameScene extends Scene {
 		GameController.getInstance().setGC(gc);
 		GameController.getInstance().initialize();
 
-		UpgradeModal upgradeModal = new UpgradeModal();
-		gamePane.getChildren().add(upgradeModal);
+		endGameModal = new EndGameModal();
+		upgradeModal = new UpgradeModal();
+		gamePane.getChildren().addAll(upgradeModal, endGameModal);
 
 		isEscHold = false;
 		setOnKeyPressed(e -> {
@@ -60,4 +64,21 @@ public class MainGameScene extends Scene {
 		};
 		timer.start();
 	}
+
+	public void openUpgradeModal() {
+		upgradeModal.setVisible(true);
+		GameController.getInstance().setGameRunning(false);
+
+	}
+
+	public void closeUpgradeModal() {
+		upgradeModal.setVisible(false);
+		GameController.getInstance().setGameRunning(true);
+	}
+
+	public void openEndGameModal() {
+		endGameModal.setVisible(true);
+		GameController.getInstance().setGameRunning(false);
+	}
+
 }
