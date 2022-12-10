@@ -103,4 +103,10 @@ public class RenderableHolder {
 	public static Font getFont(double size) {
 		return Font.loadFont(ClassLoader.getSystemResource("font/8bit.ttf").toString(), size);
 	}
+
+	public static Image loadNewTankExplosion() {
+		// Need to load new Image because they aren't restart.s
+		return new Image(ClassLoader.getSystemResource("images/explosion.gif").toString());
+
+	}
 }

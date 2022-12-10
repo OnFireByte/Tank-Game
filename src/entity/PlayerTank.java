@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import logic.GameController;
 import logic.GameLogic;
 import logic.InputUtil;
+import sharedObject.RenderableHolder;
 import sharedObject.SceneManager;
 
 public class PlayerTank extends Tank {
@@ -151,4 +152,12 @@ public class PlayerTank extends Tank {
         hp = maxHp;
     }
 
+    @Override
+    public void shoot() {
+        if (shootCoolDownCounter > 0) {
+            return;
+        }
+        RenderableHolder.ShootSound.play();
+        super.shoot();
+    }
 }

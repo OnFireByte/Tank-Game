@@ -2,6 +2,7 @@ package entity.base;
 
 import common.Direction;
 import entity.Bullet;
+import entity.ExplosionParticle;
 import entity.Wall;
 import entity.interfaces.Hittable;
 import javafx.scene.canvas.GraphicsContext;
@@ -201,6 +202,7 @@ public abstract class Tank extends MovableEntity implements Hittable {
     public void kill() {
         GameController.getInstance().getTanks().remove(this);
         isAlive = false;
+        new ExplosionParticle(x, y);
     }
 
     abstract protected boolean shootInput();

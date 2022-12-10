@@ -46,8 +46,8 @@ public class GameMenu extends GridPane implements Updatable {
         score.setFont(font);
         add(hp, 0, 0);
         add(score, 0, 1);
-        add(backButton, 2, 0);
-        add(pauseButton, 2, 1);
+        // add(backButton, 2, 0);
+        // add(pauseButton, 2, 1);
     }
 
     @Override

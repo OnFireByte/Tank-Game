@@ -40,6 +40,7 @@ public class EndGameModal extends GridPane {
         restartButton.setOnMouseClicked(e -> {
             GameController.getInstance().reset();
             setVisible(false);
+            GameController.getInstance().setGameRunning(true);
         });
 
         BaseButton exitButton = new BaseButton("Go to Main Menu", 12);
