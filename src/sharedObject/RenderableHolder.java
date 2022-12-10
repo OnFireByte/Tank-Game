@@ -100,8 +100,7 @@ public class RenderableHolder {
 		mainMenuMusic = new AudioClip(ClassLoader.getSystemResource(sound + "mainmenu_music.mp3").toString());
 		ShootSound = new AudioClip(ClassLoader.getSystemResource(sound + "Shoot.mp3").toString());
 		ExplosionSound = new AudioClip(ClassLoader.getSystemResource(sound + "Explode.mp3").toString());
-		
-		
+
 		// font
 		buttonFont = Font.loadFont(ClassLoader.getSystemResource(font + "8bit.ttf").toString(), 100);
 
@@ -122,5 +121,12 @@ public class RenderableHolder {
 		// Need to load new Image because they aren't restart.s
 		return new Image(ClassLoader.getSystemResource("images/explosion.gif").toString());
 
+	}
+	
+	public static ImageView getButton(double w , double  h) {
+		return new ImageView(new Image(ClassLoader.getSystemResource("images/Button.png").toString(), w, h, false, false));
+	}
+	public static ImageView getButtonPressed(double w , double  h) {
+		return new ImageView(new Image(ClassLoader.getSystemResource("images/ButtonPressed.png").toString(), w, h, false, false));
 	}
 }
