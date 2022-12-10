@@ -27,15 +27,20 @@ public class RenderableHolder {
 
 	// image
 	public static Image test;
-	public static Image Wall1;
-	public static Image Wall2;
-	public static Image Tank1;
-	public static Image Tank1Hit;
-	public static Image Tank2;
-	public static Image TankExplosion;
-	public static Image Button;
-	public static Image ButtonPressed;
-	public static Image TxtFrame;
+	public static Image wall1;
+	public static Image wall2;
+	public static Image tank1;
+	public static Image tank1Hit;
+	public static Image tank2;
+	public static Image tankExplosion;
+	public static Image button;
+	public static Image buttonPressed;
+	public static Image txtFrame;
+	public static Image speedUpgrade;
+	public static Image fireRateUpgrade;
+	public static Image maxHpUpgrade;
+	public static Image sizeUpgrade;
+	public static Image heal;
 	// font
 	public static Font buttonFont;
 
@@ -87,15 +92,20 @@ public class RenderableHolder {
 
 		// image
 		test = new Image(ClassLoader.getSystemResource(image + "test.jpg").toString(), 700, 500, false, false);
-		Wall1 = new Image(ClassLoader.getSystemResource(image + "Wall1.jpg").toString());
-		Wall2 = new Image(ClassLoader.getSystemResource(image + "Wall2.jpg").toString());
-		Tank1 = new Image(ClassLoader.getSystemResource(image + "Tank1.gif").toString());
-		Tank1Hit = new Image(ClassLoader.getSystemResource(image + "Tank1hit.png").toString());
-		Tank2 = new Image(ClassLoader.getSystemResource(image + "Tank2.gif").toString());
-		TankExplosion = new Image(ClassLoader.getSystemResource(image + "explosion.gif").toString());
-		Button = new Image(ClassLoader.getSystemResource(image + "Button.png").toString());
-		ButtonPressed = new Image(ClassLoader.getSystemResource(image + "ButtonPressed.png").toString());
-		TxtFrame = new Image(ClassLoader.getSystemResource(image + "txt.png").toString(), 450, 90, false, false);
+		wall1 = new Image(ClassLoader.getSystemResource(image + "Wall1.jpg").toString());
+		wall2 = new Image(ClassLoader.getSystemResource(image + "Wall2.jpg").toString());
+		tank1 = new Image(ClassLoader.getSystemResource(image + "Tank1.gif").toString());
+		tank1Hit = new Image(ClassLoader.getSystemResource(image + "Tank1hit.png").toString());
+		tank2 = new Image(ClassLoader.getSystemResource(image + "Tank2.gif").toString());
+		tankExplosion = new Image(ClassLoader.getSystemResource(image + "explosion.gif").toString());
+		button = new Image(ClassLoader.getSystemResource(image + "Button.png").toString());
+		buttonPressed = new Image(ClassLoader.getSystemResource(image + "ButtonPressed.png").toString());
+		txtFrame = new Image(ClassLoader.getSystemResource(image + "txt.png").toString(), 450, 90, false, false);
+		speedUpgrade = new Image(ClassLoader.getSystemResource(image + "speed.gif").toString());
+		fireRateUpgrade = new Image(ClassLoader.getSystemResource(image + "firerate.gif").toString());
+		maxHpUpgrade = new Image(ClassLoader.getSystemResource(image + "maxhp.gif").toString());
+		sizeUpgrade = new Image(ClassLoader.getSystemResource(image + "size.gif").toString());
+		heal = new Image(ClassLoader.getSystemResource(image + "heal.gif").toString());
 
 		// audio
 		clickSound = new AudioClip(ClassLoader.getSystemResource(sound + "soundclick.mp3").toString());
