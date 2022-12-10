@@ -148,6 +148,8 @@ public class GameController {
         tanks.clear();
         bullets.clear();
         walls.clear();
+        particles.clear();
+        upgraders.clear();
         playerScore = 0;
         initialize();
     }

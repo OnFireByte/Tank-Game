@@ -23,6 +23,10 @@ public class UpgradeBox extends VBox {
     private Color bgHoverColor = Color.GRAY;
 
     public UpgradeBox(String name, String desc, Image icon, int level, int maxLevel) {
+        this(name, desc, icon, level, maxLevel, 50);
+    }
+
+    public UpgradeBox(String name, String desc, Image icon, int level, int maxLevel, int size) {
         super();
         setPadding(new Insets(10));
         setAlignment(Pos.CENTER);
@@ -33,8 +37,8 @@ public class UpgradeBox extends VBox {
         setBackground(new Background(new BackgroundFill(bgColor, null, getInsets())));
 
         ImageView iconView = new ImageView(icon);
-        iconView.setFitWidth(50);
-        iconView.setFitHeight(50);
+        iconView.setFitWidth(size);
+        iconView.setFitHeight(size);
 
         Text title = new Text(name);
         title.setFont(RenderableHolder.getFont(18));

@@ -23,7 +23,7 @@ public class RenderableHolder {
 	public static AudioClip clickSound;
 	public static AudioClip mainMenuMusic;
 	public static AudioClip ShootSound;
-	public static AudioClip ExplosionSound;
+	public static AudioClip explosionSound;
 
 	// image
 	public static Image test;
@@ -101,7 +101,7 @@ public class RenderableHolder {
 		clickSound = new AudioClip(ClassLoader.getSystemResource(sound + "soundclick.mp3").toString());
 		mainMenuMusic = new AudioClip(ClassLoader.getSystemResource(sound + "mainmenu_music.mp3").toString());
 		ShootSound = new AudioClip(ClassLoader.getSystemResource(sound + "Shoot.mp3").toString());
-		ExplosionSound = new AudioClip(ClassLoader.getSystemResource(sound + "Explode.mp3").toString());
+		explosionSound = new AudioClip(ClassLoader.getSystemResource(sound + "Explode.mp3").toString());
 
 		// font
 		buttonFont = Font.loadFont(ClassLoader.getSystemResource(font + "8bit.ttf").toString(), 100);

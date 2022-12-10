@@ -33,7 +33,7 @@ public abstract class Tank extends MovableEntity implements Hittable {
         shootCoolDownCounter = 0;
         this.speed = speed;
         GameController.getInstance().getTanks().add(this);
-        sprite = RenderableHolder.Tank1;
+        sprite = RenderableHolder.tank1;
         this.maxHp = maxHp;
         this.hp = maxHp;
 
@@ -45,7 +45,7 @@ public abstract class Tank extends MovableEntity implements Hittable {
         this.isPlayerSide = isPlayerSide;
         shootCoolDown = 30;
         shootCoolDownCounter = 0;
-        sprite = RenderableHolder.Tank1;
+        sprite = RenderableHolder.tank1;
         this.maxHp = maxHp;
         hp = maxHp;
     }
@@ -126,7 +126,7 @@ public abstract class Tank extends MovableEntity implements Hittable {
             default:
                 break;
         }
-        gc.drawImage(isHitted ? RenderableHolder.Tank1Hit : sprite, -width / 2, -height / 2, width,
+        gc.drawImage(isHitted ? RenderableHolder.tank1Hit : sprite, -width / 2, -height / 2, width,
                 height);
         gc.restore();
 

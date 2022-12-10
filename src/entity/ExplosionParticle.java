@@ -6,8 +6,8 @@ import sharedObject.RenderableHolder;
 public class ExplosionParticle extends Particle {
 
     public ExplosionParticle(float x, float y) {
-        super(60, 60, x - 7, y - 7, RenderableHolder.loadNewTankExplosion(), 55);
-        RenderableHolder.ExplosionSound.play();
+        super(40, 40, x - 4, y - 4, RenderableHolder.loadNewTankExplosion(), 55);
+        RenderableHolder.explosionSound.play();
 
     }
 }

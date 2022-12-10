@@ -35,14 +35,14 @@ public class ButtonPane extends VBox {
 		// Name
 		Button txt = new Button("Tank Game");
 		txt.setFont(RenderableHolder.getFont(20));
-		ImageView t = new ImageView(RenderableHolder.TxtFrame);
+		ImageView t = new ImageView(RenderableHolder.txtFrame);
 		txt.setBackground(null);
 		txt.setPadding(Insets.EMPTY);
 		txt.setContentDisplay(ContentDisplay.CENTER);
 		txt.setGraphic(t);
 
 		txt.setFont(RenderableHolder.getFont(40));
-		
+
 		// play button
 		initializeStartButton();
 
@@ -56,7 +56,7 @@ public class ButtonPane extends VBox {
 	}
 
 	public void initializeStartButton() {
-		startButton = new BaseButton("Play" , 190 , 50);		
+		startButton = new BaseButton("Play", 190, 50);
 		startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
@@ -72,8 +72,8 @@ public class ButtonPane extends VBox {
 	}
 
 	public void initializeHelpButton() {
-		
-		helpButton = new BaseButton("Help" , 190 , 50);
+
+		helpButton = new BaseButton("Help", 190, 50);
 		helpButton.setOnMouseClicked(arg0 -> {
 			RenderableHolder.clickSound.play();
 			helpPane.showHelpPane();
@@ -81,8 +81,8 @@ public class ButtonPane extends VBox {
 	}
 
 	public void initializeExitButton() {
-		exitButton = new BaseButton("Exit" , 190 , 50);
-		
+		exitButton = new BaseButton("Exit", 190, 50);
+
 		exitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override

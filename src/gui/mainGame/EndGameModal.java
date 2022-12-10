@@ -9,10 +9,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import logic.GameController;
 import sharedObject.RenderableHolder;
 import sharedObject.SceneManager;
@@ -43,7 +40,7 @@ public class EndGameModal extends GridPane {
             GameController.getInstance().setGameRunning(true);
         });
 
-        BaseButton exitButton = new BaseButton("Go to Main Menu");
+        BaseButton exitButton = new BaseButton("Go to Main Menu", 300, 50, 15);
         exitButton.setOnMouseClicked(e -> {
             SceneManager.getInstance().setToMainMenu();
             setVisible(false);

@@ -7,7 +7,7 @@ import sharedObject.RenderableHolder;
 
 public class Wall extends BaseEntity {
 
-    private int size;
+    protected int size;
 
     public Wall(float x, float y, int size) {
         super(size, size, x, y, 10);
@@ -22,7 +22,7 @@ public class Wall extends BaseEntity {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.Wall1, x - size / 2, y - size / 2, size, size);
+        gc.drawImage(RenderableHolder.wall1, x - size / 2, y - size / 2, size, size);
 
     }
 

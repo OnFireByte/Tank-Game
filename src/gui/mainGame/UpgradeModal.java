@@ -19,18 +19,21 @@ public class UpgradeModal extends GridPane implements Updatable {
     public UpgradeModal() {
         super();
         setVisible(false);
-        sizeBox = new UpgradeBox("Size", "Make your tank smaller, easier to dodge.", RenderableHolder.Tank2,
+        sizeBox = new UpgradeBox("Size", "Make your tank smaller, easier to dodge. Less is more_",
+                RenderableHolder.sizeUpgrade,
                 GameController.getInstance().getPlayer().getSizeLevel(), Constant.MAX_UPGRADE_LEVEL);
 
-        speedBox = new UpgradeBox("Speed", "Make your tank faster, tank goes whoop whoop!", RenderableHolder.Tank2,
+        speedBox = new UpgradeBox("Speed", "Make your tank faster, tank goes whoop whoop!",
+                RenderableHolder.speedUpgrade,
                 GameController.getInstance().getPlayer().getSpeedLevel(), Constant.MAX_UPGRADE_LEVEL);
-        hpBox = new UpgradeBox("HP", "Increase tank's health, stay healthy!", RenderableHolder.Tank2,
+        hpBox = new UpgradeBox("HP", "Increase tank's health, stay healthy!", RenderableHolder.maxHpUpgrade,
                 GameController.getInstance().getPlayer().getMaxHpLevel(), Constant.MAX_UPGRADE_LEVEL);
         fireRateBox = new UpgradeBox("Fire Rate",
-                "Increase tank's fire rate speed, from pistol to legitimate warcrime weapon.", RenderableHolder.Tank2,
+                "Increase tank's fire rate speed. Pew pew",
+                RenderableHolder.fireRateUpgrade,
                 GameController.getInstance().getPlayer().getShootCoolDownLevel(), Constant.MAX_UPGRADE_LEVEL);
 
-        healBox = new UpgradeBox("Heal", "Heal your tank, get back to the battlefield!", RenderableHolder.Tank2, 0, 0);
+        healBox = new UpgradeBox("Heal", "Heal your tank, get back to the battlefield!", RenderableHolder.heal, 0, 0);
 
         setBackground(new Background(new BackgroundFill(Color.GRAY, null, getInsets())));
         setMaxHeight(500);
