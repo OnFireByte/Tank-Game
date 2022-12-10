@@ -18,7 +18,8 @@ public class BotTank extends Tank {
         isBlocked = false;
         calculateNextDirectionCoolDown = ThreadLocalRandom.current().nextInt(30, 60);
         calculateNextDirectionCoolDownCounter = 0;
-        sprite = RenderableHolder.Tank2;
+        sprite = RenderableHolder.tank2;
+        bulletSpeed = 5;
 
     }
 
@@ -28,7 +29,8 @@ public class BotTank extends Tank {
         isBlocked = false;
         calculateNextDirectionCoolDown = ThreadLocalRandom.current().nextInt(30, 60);
         calculateNextDirectionCoolDownCounter = 0;
-        sprite = RenderableHolder.Tank2;
+        sprite = RenderableHolder.tank2;
+        bulletSpeed = 5;
 
     }
 
@@ -43,7 +45,7 @@ public class BotTank extends Tank {
     @Override
     protected boolean shootInput() {
 
-        return ThreadLocalRandom.current().nextInt(0, 100) == 0;
+        return ThreadLocalRandom.current().nextInt(0, 200) == 0;
     }
 
     @Override
@@ -98,8 +100,8 @@ public class BotTank extends Tank {
     @Override
     public void kill() {
         GameController.addPlayerScore(1);
-        new Upgrader(getX(), getY());
         if (ThreadLocalRandom.current().nextInt(0, 10) == 0) {
+            new Upgrader(getX(), getY());
         }
 
         super.kill();

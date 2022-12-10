@@ -9,6 +9,7 @@ import entity.Bullet;
 import entity.PlayerTank;
 import entity.Upgrader;
 import entity.Wall;
+import entity.base.Particle;
 import entity.base.Tank;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -25,6 +26,7 @@ public class GameController {
     private ConcurrentLinkedQueue<Bullet> bullets = new ConcurrentLinkedQueue<>();
     private ConcurrentLinkedQueue<Wall> walls = new ConcurrentLinkedQueue<>();
     private ConcurrentLinkedQueue<Upgrader> upgraders = new ConcurrentLinkedQueue<>();
+    private ConcurrentLinkedQueue<Particle> particles = new ConcurrentLinkedQueue<>();
 
     private PlayerTank player;
 
@@ -83,6 +85,10 @@ public class GameController {
         return upgraders;
     }
 
+    public ConcurrentLinkedQueue<Particle> getParticles() {
+        return particles;
+    }
+
     public PlayerTank getPlayer() {
         return player;
     }
@@ -125,6 +131,9 @@ public class GameController {
         for (Wall wall : walls) {
             wall.update();
         }
+        for (Particle particle : particles) {
+            particle.update();
+        }
     }
 
     public void setGC(GraphicsContext gc) {
@@ -139,6 +148,8 @@ public class GameController {
         tanks.clear();
         bullets.clear();
         walls.clear();
+        particles.clear();
+        upgraders.clear();
         playerScore = 0;
         initialize();
     }

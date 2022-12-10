@@ -1,6 +1,7 @@
 package sharedObject;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
 import java.util.ArrayList;
@@ -22,17 +23,24 @@ public class RenderableHolder {
 	public static AudioClip clickSound;
 	public static AudioClip mainMenuMusic;
 	public static AudioClip ShootSound;
-	public static AudioClip ExplosionSound;
+	public static AudioClip explosionSound;
 
 	// image
 	public static Image test;
-	public static Image Wall1;
-	public static Image Tank1;
-	public static Image Tank1Hit;
-	public static Image Tank2;
-	public static Image TankExplosion;
-	
-	
+	public static Image wall1;
+	public static Image wall2;
+	public static Image tank1;
+	public static Image tank1Hit;
+	public static Image tank2;
+	public static Image tankExplosion;
+	public static Image button;
+	public static Image buttonPressed;
+	public static Image txtFrame;
+	public static Image speedUpgrade;
+	public static Image fireRateUpgrade;
+	public static Image maxHpUpgrade;
+	public static Image sizeUpgrade;
+	public static Image heal;
 	// font
 	public static Font buttonFont;
 
@@ -78,24 +86,33 @@ public class RenderableHolder {
 		String font = "font/";
 
 		// GIF image
-		mainMenuGif = new Image(ClassLoader.getSystemResource(image + "mainmenu.gif").toString(), 1000, 600, false,
+		mainMenuGif = new Image(ClassLoader.getSystemResource(image + "mainmenu.gif").toString(), 1000, 700, false,
 				false);
 		iconGif = new Image(ClassLoader.getSystemResource(image + "tank.gif").toString());
 
 		// image
 		test = new Image(ClassLoader.getSystemResource(image + "test.jpg").toString(), 700, 500, false, false);
-		Wall1 = new Image(ClassLoader.getSystemResource(image + "Wall1.jpg").toString());
-		Tank1 = new Image(ClassLoader.getSystemResource(image + "Tank1.gif").toString());
-		Tank1Hit = new Image(ClassLoader.getSystemResource(image + "Tank1hit.png").toString());
-		Tank2 = new Image(ClassLoader.getSystemResource(image + "Tank2.gif").toString());
-		TankExplosion = new Image(ClassLoader.getSystemResource(image + "explosion.gif").toString());
-		
+		wall1 = new Image(ClassLoader.getSystemResource(image + "Wall1.jpg").toString());
+		wall2 = new Image(ClassLoader.getSystemResource(image + "Wall2.jpg").toString());
+		tank1 = new Image(ClassLoader.getSystemResource(image + "Tank1.gif").toString());
+		tank1Hit = new Image(ClassLoader.getSystemResource(image + "Tank1hit.png").toString());
+		tank2 = new Image(ClassLoader.getSystemResource(image + "Tank2.gif").toString());
+		tankExplosion = new Image(ClassLoader.getSystemResource(image + "explosion.gif").toString());
+		button = new Image(ClassLoader.getSystemResource(image + "Button.png").toString());
+		buttonPressed = new Image(ClassLoader.getSystemResource(image + "ButtonPressed.png").toString());
+		txtFrame = new Image(ClassLoader.getSystemResource(image + "txt.png").toString(), 450, 90, false, false);
+		speedUpgrade = new Image(ClassLoader.getSystemResource(image + "speed.gif").toString());
+		fireRateUpgrade = new Image(ClassLoader.getSystemResource(image + "firerate.gif").toString());
+		maxHpUpgrade = new Image(ClassLoader.getSystemResource(image + "maxhp.gif").toString());
+		sizeUpgrade = new Image(ClassLoader.getSystemResource(image + "size.gif").toString());
+		heal = new Image(ClassLoader.getSystemResource(image + "heal.gif").toString());
+
 		// audio
 		clickSound = new AudioClip(ClassLoader.getSystemResource(sound + "soundclick.mp3").toString());
 		mainMenuMusic = new AudioClip(ClassLoader.getSystemResource(sound + "mainmenu_music.mp3").toString());
 		ShootSound = new AudioClip(ClassLoader.getSystemResource(sound + "Shoot.mp3").toString());
-		ExplosionSound = new AudioClip(ClassLoader.getSystemResource(sound + "Explode.mp3").toString());
-		
+		explosionSound = new AudioClip(ClassLoader.getSystemResource(sound + "Explode.mp3").toString());
+
 		// font
 		buttonFont = Font.loadFont(ClassLoader.getSystemResource(font + "8bit.ttf").toString(), 100);
 
@@ -103,5 +120,21 @@ public class RenderableHolder {
 
 	public static Font getFont(double size) {
 		return Font.loadFont(ClassLoader.getSystemResource("font/8bit.ttf").toString(), size);
+	}
+
+	public static ImageView getButton(double w, double h) {
+		return new ImageView(
+				new Image(ClassLoader.getSystemResource("images/Button.png").toString(), w, h, false, false));
+	}
+
+	public static ImageView getButtonPressed(double w, double h) {
+		return new ImageView(
+				new Image(ClassLoader.getSystemResource("images/ButtonPressed.png").toString(), w, h, false, false));
+	}
+
+	public static Image loadNewTankExplosion() {
+		// Need to load new Image because they aren't restart.s
+		return new Image(ClassLoader.getSystemResource("images/explosion.gif").toString());
+
 	}
 }

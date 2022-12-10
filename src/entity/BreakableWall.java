@@ -3,8 +3,10 @@ package entity;
 import entity.base.Tank;
 import entity.interfaces.Hittable;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import logic.GameController;
 import logic.GameLogic;
+import sharedObject.RenderableHolder;
 
 public class BreakableWall extends Wall implements Hittable {
 
@@ -59,7 +61,8 @@ public class BreakableWall extends Wall implements Hittable {
     @Override
     public void draw(GraphicsContext gc) {
         if (!isBroken) {
-            super.draw(gc);
+            Image wall = hp == maxHp ? RenderableHolder.wall1 : RenderableHolder.wall2;
+            gc.drawImage(wall, x - size / 2, y - size / 2, size, size);
         }
     }
 
