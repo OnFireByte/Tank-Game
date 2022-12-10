@@ -100,4 +100,8 @@ public class RenderableHolder {
 		buttonFont = Font.loadFont(ClassLoader.getSystemResource(font + "8bit.ttf").toString(), 100);
 
 	}
+
+	public static Font getFont(double size) {
+		return Font.loadFont(ClassLoader.getSystemResource("font/8bit.ttf").toString(), size);
+	}
 }

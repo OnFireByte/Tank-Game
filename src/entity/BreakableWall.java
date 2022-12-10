@@ -1,5 +1,6 @@
 package entity;
 
+import entity.base.Tank;
 import entity.interfaces.Hittable;
 import javafx.scene.canvas.GraphicsContext;
 import logic.GameController;
@@ -11,7 +12,7 @@ public class BreakableWall extends Wall implements Hittable {
     private int maxHp;
     private boolean isBroken;
 
-    private int respawnTime = 5 * 60;
+    private int respawnTime = 15 * 60;
     private int respawnTimeCounter = 0;
 
     public BreakableWall(float x, float y, int size, int hp) {
@@ -22,8 +23,8 @@ public class BreakableWall extends Wall implements Hittable {
 
     public BreakableWall(float x, float y, int size) {
         super(x, y, size);
-        this.hp = 1;
-        this.maxHp = 1;
+        this.maxHp = 2;
+        this.hp = maxHp;
     }
 
     @Override

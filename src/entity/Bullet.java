@@ -1,8 +1,9 @@
 package entity;
 
-import common.AppConstant;
+import common.Constant;
 import common.Direction;
 import entity.base.MovableEntity;
+import entity.base.Tank;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.GameController;
@@ -48,7 +49,7 @@ public class Bullet extends MovableEntity {
 
         hitCheck();
 
-        if (0 > x || x > AppConstant.APP_WIDTH || 0 > y || y > AppConstant.APP_HEIGHT) {
+        if (0 > x || x > Constant.GAME_WIDTH || 0 > y || y > Constant.GAME_HEIGHT) {
             return;
         }
 

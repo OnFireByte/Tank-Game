@@ -2,13 +2,13 @@ package logic;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import common.AppConstant;
+import common.Constant;
 import common.Direction;
 import entity.BotTank;
 import entity.BreakableWall;
-import entity.Tank;
 import entity.Wall;
 import entity.base.BaseEntity;
+import entity.base.Tank;
 
 public class GameLogic {
     public static boolean isCollided(BaseEntity a, BaseEntity b) {
@@ -25,22 +25,22 @@ public class GameLogic {
     }
 
     public static void spawnEnemy() {
-        var a = new BotTank(ThreadLocalRandom.current().nextInt(0, AppConstant.APP_WIDTH),
-                ThreadLocalRandom.current().nextInt(41, AppConstant.APP_HEIGHT - 40), (float) 1, Direction.LEFT);
+        var a = new BotTank(ThreadLocalRandom.current().nextInt(0, Constant.GAME_WIDTH),
+                ThreadLocalRandom.current().nextInt(41, Constant.GAME_HEIGHT - 40), (float) 1, Direction.LEFT);
         while (true) {
             boolean isCollided = false;
             for (Tank tank : GameController.getInstance().getTanks()) {
                 if (tank != a && GameLogic.isCollided(tank, a)) {
-                    a.setX(ThreadLocalRandom.current().nextInt(0, AppConstant.APP_WIDTH));
-                    a.setY(ThreadLocalRandom.current().nextInt(0, AppConstant.APP_HEIGHT));
+                    a.setX(ThreadLocalRandom.current().nextInt(0, Constant.GAME_WIDTH));
+                    a.setY(ThreadLocalRandom.current().nextInt(0, Constant.GAME_HEIGHT));
                     isCollided = true;
                     break;
                 }
             }
             for (Wall wall : GameController.getInstance().getWalls()) {
                 if (GameLogic.isCollided(wall, a)) {
-                    a.setX(ThreadLocalRandom.current().nextInt(0, AppConstant.APP_WIDTH));
-                    a.setY(ThreadLocalRandom.current().nextInt(0, AppConstant.APP_HEIGHT));
+                    a.setX(ThreadLocalRandom.current().nextInt(0, Constant.GAME_WIDTH));
+                    a.setY(ThreadLocalRandom.current().nextInt(0, Constant.GAME_HEIGHT));
                     isCollided = true;
                     break;
                 }

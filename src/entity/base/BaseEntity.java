@@ -1,8 +1,9 @@
 package entity.base;
 
+import common.Updatable;
 import sharedObject.IRenderable;
 
-public abstract class BaseEntity implements IRenderable {
+public abstract class BaseEntity implements Updatable, IRenderable {
     protected int width;
     protected int height;
     protected float x;
@@ -50,6 +51,10 @@ public abstract class BaseEntity implements IRenderable {
 
     public float getY() {
         return y;
+    }
+
+    public int getZ() {
+        return z;
     }
 
     public void setY(float y) {

@@ -1,3 +1,7 @@
-/scenes/
+/application/
+/common/
+/entity/
 /gui/
+/logic/
+/scenes/
 /sharedObject/

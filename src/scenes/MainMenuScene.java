@@ -1,6 +1,6 @@
 package scenes;
 
-import common.AppConstant;
+import common.Constant;
 import gui.mainMenu.ButtonPane;
 import gui.mainMenu.HelpPane;
 import javafx.animation.AnimationTimer;
@@ -17,8 +17,8 @@ public class MainMenuScene extends Scene {
 
 	public MainMenuScene() {
 
-		super(new Pane(), AppConstant.APP_WIDTH, AppConstant.APP_HEIGHT);
-		
+		super(new Pane(), Constant.APP_WIDTH, Constant.APP_HEIGHT);
+
 		root = new StackPane(new ImageView(RenderableHolder.mainMenuGif));
 		setRoot(root);
 

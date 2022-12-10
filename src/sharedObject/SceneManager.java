@@ -38,10 +38,12 @@ public class SceneManager {
 
     public void setToMainMenu() {
         primaryStage.setScene(mainMenuScene);
+        GameController.getInstance().setGameRunning(false);
     }
 
     public void setToMainGame() {
         primaryStage.setScene(mainGameScene);
+        GameController.getInstance().reset();
         GameController.getInstance().setGameRunning(true);
     }
 

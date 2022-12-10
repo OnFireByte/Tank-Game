@@ -3,18 +3,17 @@ package entity;
 import java.util.concurrent.ThreadLocalRandom;
 
 import common.Direction;
-import javafx.scene.image.Image;
+import entity.base.Tank;
 import logic.GameController;
 import sharedObject.RenderableHolder;
 
 public class BotTank extends Tank {
-    private boolean isAlive;
+    private boolean isBlocked;
     private int calculateNextDirectionCoolDown;
     private int calculateNextDirectionCoolDownCounter;
-    private boolean isBlocked;
 
     public BotTank(float x, float y) {
-        super(x, y, false);
+        super(x, y, 1, false);
         isAlive = true;
         isBlocked = false;
         calculateNextDirectionCoolDown = ThreadLocalRandom.current().nextInt(30, 60);
@@ -24,7 +23,7 @@ public class BotTank extends Tank {
     }
 
     public BotTank(float x, float y, float speed, Direction direction) {
-        super(x, y, speed, direction, false);
+        super(x, y, speed, 1, direction, false);
         isAlive = true;
         isBlocked = false;
         calculateNextDirectionCoolDown = ThreadLocalRandom.current().nextInt(30, 60);
@@ -97,14 +96,13 @@ public class BotTank extends Tank {
     }
 
     @Override
-    public void hit() {
-        GameController.getInstance().getTanks().remove(this);
-        isAlive = false;
-    }
+    public void kill() {
+        GameController.addPlayerScore(1);
+        new Upgrader(getX(), getY());
+        if (ThreadLocalRandom.current().nextInt(0, 10) == 0) {
+        }
 
-    @Override
-    public boolean isDestroyed() {
-        return !isAlive;
+        super.kill();
     }
 
 }

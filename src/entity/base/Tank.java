@@ -1,11 +1,11 @@
-package entity;
+package entity.base;
 
 import common.Direction;
-import entity.base.MovableEntity;
+import entity.Bullet;
+import entity.Wall;
 import entity.interfaces.Hittable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.util.Pair;
 import logic.GameController;
 import logic.GameLogic;
@@ -13,33 +13,64 @@ import sharedObject.RenderableHolder;
 
 public abstract class Tank extends MovableEntity implements Hittable {
 
+    protected int hitFrame = 15;
+    protected int hitCounter = 0;
+    protected boolean isAlive;
     protected boolean isPlayerSide;
     protected int shootCoolDown;
     protected int shootCoolDownCounter;
     protected Image sprite;
 
-    public boolean isPlayerSide() {
-        return isPlayerSide;
-    }
+    protected int hp;
+    protected int maxHp;
 
-    public Tank(float x, float y, float speed, Direction direction, boolean isPlayerSide) {
+    public Tank(float x, float y, float speed, int maxHp, Direction direction, boolean isPlayerSide) {
         super(40, 40, x, y, 2, direction);
         this.isPlayerSide = isPlayerSide;
-        shootCoolDown = 10;
+        shootCoolDown = 30;
         shootCoolDownCounter = 0;
         this.speed = speed;
         GameController.getInstance().getTanks().add(this);
         sprite = RenderableHolder.Tank1;
+        this.maxHp = maxHp;
+        this.hp = maxHp;
 
     }
 
-    public Tank(float x, float y, boolean isPlayerSide) {
+    public Tank(float x, float y, int maxHp, boolean isPlayerSide) {
 
         super(40, 40, x, y, 2, Direction.UP);
         this.isPlayerSide = isPlayerSide;
         shootCoolDown = 30;
         shootCoolDownCounter = 0;
         sprite = RenderableHolder.Tank1;
+        this.maxHp = maxHp;
+        hp = maxHp;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        if (hp > maxHp) {
+            hp = maxHp;
+        }
+        if (hp < 0) {
+            hp = 0;
+        }
+        this.hp = hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setMaxHp(int hp) {
+        if (hp < 1) {
+            hp = 1;
+        }
+        this.maxHp = hp;
     }
 
     @Override
@@ -53,21 +84,15 @@ public abstract class Tank extends MovableEntity implements Hittable {
             shoot();
         }
         forward();
-
-        draw(GameController.getInstance().getGC());
+        if (hitCounter > 0) {
+            hitCounter--;
+        }
+        draw(GameController.getInstance().getGC(), hitCounter > 0);
 
     }
 
-    abstract protected boolean shootInput();
-
-    protected void shoot() {
-        if (shootCoolDownCounter > 0) {
-            return;
-        }
-        Pair<Float, Float> pair = getFacePos();
-        new Bullet(pair.getKey(), pair.getValue(), 10, direction, isPlayerSide);
-
-        shootCoolDownCounter = shootCoolDown;
+    public boolean isPlayerSide() {
+        return isPlayerSide;
     }
 
     @Override
@@ -111,19 +136,19 @@ public abstract class Tank extends MovableEntity implements Hittable {
         switch (direction) {
             case UP:
                 fx = x;
-                fy = y - 20;
+                fy = y - height / 2;
                 break;
 
             case DOWN:
                 fx = x;
-                fy = y + 20;
+                fy = y + height / 2;
                 break;
             case LEFT:
-                fx = x - 20;
+                fx = x - width / 2;
                 fy = y;
                 break;
             case RIGHT:
-                fx = x + 20;
+                fx = x + width / 2;
                 fy = y;
                 break;
 
@@ -133,6 +158,60 @@ public abstract class Tank extends MovableEntity implements Hittable {
                 break;
         }
         return new Pair<Float, Float>(fx, fy);
+    }
+
+    public void setPlayerSide(boolean isPlayerSide) {
+        this.isPlayerSide = isPlayerSide;
+    }
+
+    public int getShootCoolDown() {
+        return shootCoolDown;
+    }
+
+    public void setShootCoolDown(int shootCoolDown) {
+        if (shootCoolDown < 0) {
+            shootCoolDown = 0;
+        }
+        this.shootCoolDown = shootCoolDown;
+    }
+
+    public int getShootCoolDownCounter() {
+        return shootCoolDownCounter;
+    }
+
+    public void setShootCoolDownCounter(int shootCoolDownCounter) {
+        if (shootCoolDownCounter < 0) {
+            shootCoolDownCounter = 0;
+        }
+        this.shootCoolDownCounter = shootCoolDownCounter;
+    }
+
+    @Override
+    public void hit() {
+        hitCounter = hitFrame;
+        draw(GameController.getInstance().getGC(), true);
+        setHp(hp - 1);
+        if (hp <= 0) {
+            kill();
+        }
+
+    }
+
+    public void kill() {
+        GameController.getInstance().getTanks().remove(this);
+        isAlive = false;
+    }
+
+    abstract protected boolean shootInput();
+
+    protected void shoot() {
+        if (shootCoolDownCounter > 0) {
+            return;
+        }
+        Pair<Float, Float> pair = getFacePos();
+        new Bullet(pair.getKey(), pair.getValue(), 10, direction, isPlayerSide);
+
+        shootCoolDownCounter = shootCoolDown;
     }
 
     protected void forward() {
@@ -196,32 +275,11 @@ public abstract class Tank extends MovableEntity implements Hittable {
         }
     }
 
-    abstract protected Direction getNextDirection();
-
-    public void setPlayerSide(boolean isPlayerSide) {
-        this.isPlayerSide = isPlayerSide;
-    }
-
-    public int getShootCoolDown() {
-        return shootCoolDown;
-    }
-
-    public void setShootCoolDown(int shootCoolDown) {
-        this.shootCoolDown = shootCoolDown;
-    }
-
-    public int getShootCoolDownCounter() {
-        return shootCoolDownCounter;
-    }
-
-    public void setShootCoolDownCounter(int shootCoolDownCounter) {
-        this.shootCoolDownCounter = shootCoolDownCounter;
-    }
-
     @Override
-    public void hit() {
-        draw(GameController.getInstance().getGC(), true);
-
+    public boolean isDestroyed() {
+        return !isAlive;
     }
+
+    abstract protected Direction getNextDirection();
 
 }
