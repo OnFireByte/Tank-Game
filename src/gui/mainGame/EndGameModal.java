@@ -43,7 +43,7 @@ public class EndGameModal extends GridPane {
             GameController.getInstance().setGameRunning(true);
         });
 
-        BaseButton exitButton = new BaseButton("Go to Main Menu", 12);
+        BaseButton exitButton = new BaseButton("Go to Main Menu");
         exitButton.setOnMouseClicked(e -> {
             SceneManager.getInstance().setToMainMenu();
             setVisible(false);
