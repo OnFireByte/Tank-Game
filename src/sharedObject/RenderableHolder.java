@@ -1,6 +1,7 @@
 package sharedObject;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
 import java.util.ArrayList;
@@ -31,7 +32,9 @@ public class RenderableHolder {
 	public static Image Tank1Hit;
 	public static Image Tank2;
 	public static Image TankExplosion;
-
+	public static Image Button;
+	public static Image ButtonPressed;
+	public static Image TxtFrame;
 	// font
 	public static Font buttonFont;
 
@@ -77,7 +80,7 @@ public class RenderableHolder {
 		String font = "font/";
 
 		// GIF image
-		mainMenuGif = new Image(ClassLoader.getSystemResource(image + "mainmenu.gif").toString(), 1000, 600, false,
+		mainMenuGif = new Image(ClassLoader.getSystemResource(image + "mainmenu.gif").toString(), 1000, 700, false,
 				false);
 		iconGif = new Image(ClassLoader.getSystemResource(image + "tank.gif").toString());
 
@@ -88,13 +91,17 @@ public class RenderableHolder {
 		Tank1Hit = new Image(ClassLoader.getSystemResource(image + "Tank1hit.png").toString());
 		Tank2 = new Image(ClassLoader.getSystemResource(image + "Tank2.gif").toString());
 		TankExplosion = new Image(ClassLoader.getSystemResource(image + "explosion.gif").toString());
-
+		Button = new Image(ClassLoader.getSystemResource(image + "Button.png").toString());
+		ButtonPressed = new Image(ClassLoader.getSystemResource(image + "ButtonPressed.png").toString());
+		TxtFrame = new Image(ClassLoader.getSystemResource(image + "txt.png").toString(), 450, 90, false, false);
+		
 		// audio
 		clickSound = new AudioClip(ClassLoader.getSystemResource(sound + "soundclick.mp3").toString());
 		mainMenuMusic = new AudioClip(ClassLoader.getSystemResource(sound + "mainmenu_music.mp3").toString());
 		ShootSound = new AudioClip(ClassLoader.getSystemResource(sound + "Shoot.mp3").toString());
 		ExplosionSound = new AudioClip(ClassLoader.getSystemResource(sound + "Explode.mp3").toString());
-
+		
+		
 		// font
 		buttonFont = Font.loadFont(ClassLoader.getSystemResource(font + "8bit.ttf").toString(), 100);
 
@@ -102,6 +109,13 @@ public class RenderableHolder {
 
 	public static Font getFont(double size) {
 		return Font.loadFont(ClassLoader.getSystemResource("font/8bit.ttf").toString(), size);
+	}
+	
+	public static ImageView getButton(double w , double  h) {
+		return new ImageView(new Image(ClassLoader.getSystemResource("images/Button.png").toString(), w, h, false, false));
+	}
+	public static ImageView getButtonPressed(double w , double  h) {
+		return new ImageView(new Image(ClassLoader.getSystemResource("images/ButtonPressed.png").toString(), w, h, false, false));
 	}
 
 	public static Image loadNewTankExplosion() {
