@@ -94,7 +94,7 @@ public class RenderableHolder {
 		Button = new Image(ClassLoader.getSystemResource(image + "Button.png").toString());
 		ButtonPressed = new Image(ClassLoader.getSystemResource(image + "ButtonPressed.png").toString());
 		TxtFrame = new Image(ClassLoader.getSystemResource(image + "txt.png").toString(), 450, 90, false, false);
-		
+
 		// audio
 		clickSound = new AudioClip(ClassLoader.getSystemResource(sound + "soundclick.mp3").toString());
 		mainMenuMusic = new AudioClip(ClassLoader.getSystemResource(sound + "mainmenu_music.mp3").toString());
@@ -109,24 +109,20 @@ public class RenderableHolder {
 	public static Font getFont(double size) {
 		return Font.loadFont(ClassLoader.getSystemResource("font/8bit.ttf").toString(), size);
 	}
-	
-	public static ImageView getButton(double w , double  h) {
-		return new ImageView(new Image(ClassLoader.getSystemResource("images/Button.png").toString(), w, h, false, false));
+
+	public static ImageView getButton(double w, double h) {
+		return new ImageView(
+				new Image(ClassLoader.getSystemResource("images/Button.png").toString(), w, h, false, false));
 	}
-	public static ImageView getButtonPressed(double w , double  h) {
-		return new ImageView(new Image(ClassLoader.getSystemResource("images/ButtonPressed.png").toString(), w, h, false, false));
+
+	public static ImageView getButtonPressed(double w, double h) {
+		return new ImageView(
+				new Image(ClassLoader.getSystemResource("images/ButtonPressed.png").toString(), w, h, false, false));
 	}
 
 	public static Image loadNewTankExplosion() {
 		// Need to load new Image because they aren't restart.s
 		return new Image(ClassLoader.getSystemResource("images/explosion.gif").toString());
 
-	}
-	
-	public static ImageView getButton(double w , double  h) {
-		return new ImageView(new Image(ClassLoader.getSystemResource("images/Button.png").toString(), w, h, false, false));
-	}
-	public static ImageView getButtonPressed(double w , double  h) {
-		return new ImageView(new Image(ClassLoader.getSystemResource("images/ButtonPressed.png").toString(), w, h, false, false));
 	}
 }
