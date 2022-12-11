@@ -29,7 +29,7 @@ public class MainMenuScene extends Scene {
 			@Override
 			public void handle(long arg0) {
 				if (!RenderableHolder.mainMenuMusic.isPlaying()) {
-					RenderableHolder.mainMenuMusic.play();
+					RenderableHolder.mainMenuMusic.play(0.5);
 				}
 			}
 		};

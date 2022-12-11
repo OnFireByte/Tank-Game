@@ -5,10 +5,6 @@ import common.Updatable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import logic.GameController;
@@ -23,7 +19,7 @@ public class UpgradeModal extends GridPane implements Updatable {
 
     public UpgradeModal() {
         super();
-        // setVisible(false);
+        setVisible(false);
         sizeBox = new UpgradeBox("Size", "Make your tank smaller, easier to dodge. Less is more_",
                 RenderableHolder.sizeUpgrade,
                 GameController.getInstance().getPlayer().getSizeLevel(), Constant.MAX_UPGRADE_LEVEL);
