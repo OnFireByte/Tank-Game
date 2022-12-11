@@ -32,12 +32,14 @@ public class PauseModal extends VBox {
 
         BaseButton resumeButton = new BaseButton("Resume");
         resumeButton.setOnMouseClicked(e -> {
+        	RenderableHolder.clickSound.play();
             GameController.getInstance().setGameRunning(true);
             setVisible(false);
         });
 
         BaseButton backButton = new BaseButton("Back to Main Menu", 300, 50, 15);
         backButton.setOnMouseClicked(e -> {
+        	RenderableHolder.clickSound.play();
             SceneManager.getInstance().setToMainMenu();
             setVisible(false);
         });
