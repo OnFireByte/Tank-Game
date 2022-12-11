@@ -9,10 +9,6 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import logic.GameController;
-import scenes.MainMenuScene;
 import sharedObject.RenderableHolder;
 import sharedObject.SceneManager;
 
