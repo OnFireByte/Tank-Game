@@ -39,6 +39,8 @@ public class SceneManager {
     public void setToMainMenu() {
         primaryStage.setScene(mainMenuScene);
         GameController.getInstance().setGameRunning(false);
+
+        mainMenuScene.startMusic();
     }
 
     public void setToMainGame() {
