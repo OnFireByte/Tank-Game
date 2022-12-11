@@ -4,6 +4,7 @@ import entity.base.BaseEntity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.GameController;
+import sharedObject.RenderableHolder;
 
 public class Upgrader extends BaseEntity {
 
@@ -23,8 +24,7 @@ public class Upgrader extends BaseEntity {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.setFill(Color.AQUA);
-        gc.fillRect(x - width / 2, y - height / 2, width, height);
+        gc.drawImage(RenderableHolder.upgrade, x - width / 2, y - height / 2, width, height);
     }
 
     @Override

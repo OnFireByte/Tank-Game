@@ -7,7 +7,7 @@ import common.Direction;
 import entity.base.Tank;
 import javafx.scene.Scene;
 import logic.GameController;
-import logic.GameLogic;
+import logic.GameUtil;
 import logic.InputUtil;
 import sharedObject.RenderableHolder;
 import sharedObject.SceneManager;
@@ -46,7 +46,7 @@ public class PlayerTank extends Tank {
     public void update() {
 
         for (Upgrader upgrader : GameController.getInstance().getUpgraders()) {
-            if (GameLogic.isCollided(upgrader, this)) {
+            if (GameUtil.isCollided(upgrader, this)) {
                 GameController.getInstance().getUpgraders().remove(upgrader);
                 upgrade();
                 break;
@@ -72,6 +72,7 @@ public class PlayerTank extends Tank {
     @Override
     public void kill() {
         super.kill();
+        GameController.setGameOver(true);
         SceneManager.getInstance().openEndGameModal();
     }
 

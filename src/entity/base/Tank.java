@@ -9,7 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.util.Pair;
 import logic.GameController;
-import logic.GameLogic;
+import logic.GameUtil;
 import sharedObject.RenderableHolder;
 
 public abstract class Tank extends MovableEntity implements Hittable {
@@ -244,13 +244,13 @@ public abstract class Tank extends MovableEntity implements Hittable {
 
         }
         for (Tank tank : GameController.getInstance().getTanks()) {
-            if (tank != this && GameLogic.isCollided(tank, this)) {
+            if (tank != this && GameUtil.isCollided(tank, this)) {
                 unforward();
                 break;
             }
         }
         for (Wall wall : GameController.getInstance().getWalls()) {
-            if (GameLogic.isCollided(wall, this)) {
+            if (GameUtil.isCollided(wall, this)) {
                 unforward();
                 break;
             }

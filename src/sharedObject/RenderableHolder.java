@@ -41,7 +41,9 @@ public class RenderableHolder {
 	public static Image maxHpUpgrade;
 	public static Image sizeUpgrade;
 	public static Image heal;
+	public static Image upgrade;
 	// font
+	public static Image map;
 	public static Font buttonFont;
 
 	// -------------------------------------------------------------------------------------------------------------------------------//
@@ -106,6 +108,10 @@ public class RenderableHolder {
 		maxHpUpgrade = new Image(ClassLoader.getSystemResource(image + "maxhp.gif").toString());
 		sizeUpgrade = new Image(ClassLoader.getSystemResource(image + "size.gif").toString());
 		heal = new Image(ClassLoader.getSystemResource(image + "heal.gif").toString());
+		upgrade = new Image(ClassLoader.getSystemResource(image + "upgrade.png").toString());
+
+		// map image
+		map = new Image(ClassLoader.getSystemResource(image + "map.png").toString());
 
 		// audio
 		clickSound = new AudioClip(ClassLoader.getSystemResource(sound + "soundclick.mp3").toString());

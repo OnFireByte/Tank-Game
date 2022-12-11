@@ -5,7 +5,7 @@ import entity.interfaces.Hittable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.GameController;
-import logic.GameLogic;
+import logic.GameUtil;
 import sharedObject.RenderableHolder;
 
 public class BreakableWall extends Wall implements Hittable {
@@ -46,7 +46,7 @@ public class BreakableWall extends Wall implements Hittable {
             } else {
                 isBroken = false;
                 for (Tank tank : GameController.getInstance().getTanks()) {
-                    if (GameLogic.isCollided(tank, this)) {
+                    if (GameUtil.isCollided(tank, this)) {
                         isBroken = true;
                         respawnTimeCounter = 60;
                         break;
