@@ -8,8 +8,10 @@ import entity.BotTank;
 import entity.BreakableWall;
 import entity.PlayerTank;
 import entity.Wall;
+import entity.Particle.SpawningParticle;
 import entity.base.BaseEntity;
 import entity.base.Tank;
+import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.paint.Color;
 import sharedObject.RenderableHolder;
@@ -53,6 +55,7 @@ public class GameUtil {
                 break;
             }
         }
+        new SpawningParticle(a.getX(), a.getY());
 
     }
 
@@ -94,11 +97,12 @@ public class GameUtil {
         }
     }
 
-    public static void mapLoader() {
+    public static void mapLoader(int idx) {
         // load map from image file
-        PixelReader pr = RenderableHolder.map3.getPixelReader();
-        for (int i = 0; i < RenderableHolder.map3.getWidth(); i++) {
-            for (int j = 0; j < RenderableHolder.map3.getHeight(); j++) {
+        Image img = RenderableHolder.getMap(idx);
+        PixelReader pr = img.getPixelReader();
+        for (int i = 0; i < img.getWidth(); i++) {
+            for (int j = 0; j < img.getHeight(); j++) {
                 if (toHex(pr.getColor(i, j)).equals("#CCCCCC")) {
                     new BreakableWall(i * 25 + 37.5f, j * 25 + 37.5f, 25);
                 }

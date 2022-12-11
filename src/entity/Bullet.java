@@ -2,6 +2,8 @@ package entity;
 
 import common.Constant;
 import common.Direction;
+import entity.Particle.BulletHitParticle;
+import entity.Particle.BulletShootParticle;
 import entity.base.MovableEntity;
 import entity.base.Tank;
 import javafx.scene.canvas.GraphicsContext;

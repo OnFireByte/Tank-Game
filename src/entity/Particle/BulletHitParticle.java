@@ -1,4 +1,4 @@
-package entity;
+package entity.Particle;
 
 import entity.base.Particle;
 import sharedObject.RenderableHolder;

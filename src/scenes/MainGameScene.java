@@ -15,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import logic.GameController;
 import logic.InputUtil;
+import sharedObject.RenderableHolder;
 
 public class MainGameScene extends Scene {
 	boolean isEscHold;
@@ -61,6 +62,11 @@ public class MainGameScene extends Scene {
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long currentNanoTime) {
+				if (!GameController.getInstance().isGameRunning() || GameController.isGameOver()) {
+					RenderableHolder.mainGameMusic.stop();
+				} else if (!RenderableHolder.mainGameMusic.isPlaying()) {
+					RenderableHolder.mainGameMusic.play(0.2);
+				}
 				GameController.getInstance().nextFrame(currentNanoTime);
 				gameMenu.update();
 				upgradeModal.update();

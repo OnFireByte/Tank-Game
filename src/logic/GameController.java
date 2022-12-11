@@ -11,12 +11,14 @@ import entity.base.Particle;
 import entity.base.Tank;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import sharedObject.RenderableHolder;
 
 public class GameController {
     private static GameController instance;
     private static int maxEnemy;
     private static int playerScore;
     private static boolean isGameOver;
+    private int currentMapId;
 
     private GraphicsContext gc;
 
@@ -35,6 +37,7 @@ public class GameController {
         isGameRunning = false;
         maxEnemy = 0;
         playerScore = 0;
+        isGameOver = true;
     }
 
     public static int getMaxEnemy() {
@@ -122,6 +125,11 @@ public class GameController {
         // Clear screen for redrawing
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, Constant.GAME_WIDTH, Constant.GAME_HEIGHT);
+        // for (int i = 0; i < Constant.GAME_WIDTH / 25; i += 1) {
+        // for (int j = 0; j < Constant.GAME_HEIGHT / 25; j += 1) {
+        // gc.drawImage(RenderableHolder.grass, i * 25, j * 25, 25, 25);
+        // }
+        // }
 
         GameUtil.attemptSpawnEnemy(currentNanoTime);
 
@@ -158,11 +166,11 @@ public class GameController {
         upgraders.clear();
         playerScore = 0;
         initialize();
-        isGameOver = false;
     }
 
     public void initialize() {
         // Create border walls
+        isGameOver = false;
         for (int i = 0; i < 24; i++) {
             new Wall(12.5f, i * 25 + 12.5f, 25);
             new Wall(Constant.GAME_WIDTH - 12.5f, i * 25 + 12.5f, 25);
@@ -173,7 +181,7 @@ public class GameController {
         }
 
         // Load map
-        GameUtil.mapLoader();
+        GameUtil.mapLoader(currentMapId);
 
         // Populate player and enemies
         player = GameUtil.spawnPlayerToRandomPos();
@@ -189,5 +197,13 @@ public class GameController {
 
     public static void setGameOver(boolean isGameOver) {
         GameController.isGameOver = isGameOver;
+    }
+
+    public int getCurrentMapId() {
+        return currentMapId;
+    }
+
+    public void setCurrentMapId(int currentMapId) {
+        this.currentMapId = currentMapId;
     }
 }

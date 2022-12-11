@@ -24,6 +24,9 @@ public class RenderableHolder {
 	public static AudioClip mainMenuMusic;
 	public static AudioClip ShootSound;
 	public static AudioClip explosionSound;
+	public static AudioClip gameOverSound;
+	public static AudioClip upgradeSound;
+	public static AudioClip mainGameMusic;
 
 	// image
 	public static Image test;
@@ -45,13 +48,16 @@ public class RenderableHolder {
 	public static Image unbreakableStone;
 	public static Image openingAnimationTank;
 	public static Image grass;
-	
-	//map
+	public static Image map1Preview;
+	public static Image map2Preview;
+	public static Image map3Preview;
+
+	// map
 	public static Image map1;
 	public static Image map2;
 	public static Image map3;
 	// font
-	
+
 	public static Font buttonFont;
 
 	// -------------------------------------------------------------------------------------------------------------------------------//
@@ -118,18 +124,25 @@ public class RenderableHolder {
 		heal = new Image(ClassLoader.getSystemResource(image + "heal.gif").toString());
 		upgrade = new Image(ClassLoader.getSystemResource(image + "upgrade.png").toString());
 		unbreakableStone = new Image(ClassLoader.getSystemResource(image + "UnbreakableStone.png").toString());
-		openingAnimationTank =  new Image(ClassLoader.getSystemResource(image + "Opening.gif").toString());
+		openingAnimationTank = new Image(ClassLoader.getSystemResource(image + "Opening.gif").toString());
 		grass = new Image(ClassLoader.getSystemResource(image + "grass.png").toString());
-		
+		map1Preview = new Image(ClassLoader.getSystemResource(image + "map1preview.png").toString());
+		map2Preview = new Image(ClassLoader.getSystemResource(image + "map2preview.png").toString());
+		map3Preview = new Image(ClassLoader.getSystemResource(image + "map3preview.png").toString());
+
 		// map image
 		map1 = new Image(ClassLoader.getSystemResource(image + "map.png").toString());
 		map2 = new Image(ClassLoader.getSystemResource(image + "map2.png").toString());
 		map3 = new Image(ClassLoader.getSystemResource(image + "map3.png").toString());
+
 		// audio
 		clickSound = new AudioClip(ClassLoader.getSystemResource(sound + "soundclick.mp3").toString());
 		mainMenuMusic = new AudioClip(ClassLoader.getSystemResource(sound + "mainmenu_music.mp3").toString());
 		ShootSound = new AudioClip(ClassLoader.getSystemResource(sound + "Shoot.mp3").toString());
 		explosionSound = new AudioClip(ClassLoader.getSystemResource(sound + "Explode.mp3").toString());
+		gameOverSound = new AudioClip(ClassLoader.getSystemResource(sound + "gameover.mp3").toString());
+		upgradeSound = new AudioClip(ClassLoader.getSystemResource(sound + "upgrade.mp3").toString());
+		mainGameMusic = new AudioClip(ClassLoader.getSystemResource(sound + "mainGame.mp3").toString());
 
 		// font
 		buttonFont = Font.loadFont(ClassLoader.getSystemResource(font + "8bit.ttf").toString(), 100);
@@ -154,5 +167,31 @@ public class RenderableHolder {
 		// Need to load new Image because they aren't restart.s
 		return new Image(ClassLoader.getSystemResource("images/explosion.gif").toString());
 
+	}
+
+	public static Image getMap(int idx) {
+		switch (idx) {
+			case 1:
+				return map1;
+			case 2:
+				return map2;
+			case 3:
+				return map3;
+			default:
+				return map1;
+		}
+	}
+
+	public static Image getMapPreview(int idx) {
+		switch (idx) {
+			case 1:
+				return map1Preview;
+			case 2:
+				return map2Preview;
+			case 3:
+				return map3Preview;
+			default:
+				return map1Preview;
+		}
 	}
 }

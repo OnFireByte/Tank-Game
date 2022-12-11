@@ -7,6 +7,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -24,9 +28,10 @@ public class EndGameModal extends GridPane {
         setPadding(new Insets(50));
         setAlignment(Pos.CENTER);
 
-        setMaxHeight(400);
-        setMaxWidth(800);
-        setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, getInsets())));
+        setMaxHeight(300);
+        setMaxWidth(700);
+        setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, new Insets(0))));
+        setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, null, new BorderWidths(5))));
 
         Label header = new Label("Game Over...");
         header.setFont(RenderableHolder.getFont(30));

@@ -2,8 +2,8 @@ package entity.base;
 
 import common.Direction;
 import entity.Bullet;
-import entity.ExplosionParticle;
 import entity.Wall;
+import entity.Particle.ExplosionParticle;
 import entity.interfaces.Hittable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

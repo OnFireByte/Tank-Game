@@ -2,6 +2,7 @@ package gui;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.ImageView;
@@ -40,6 +41,7 @@ public class BaseButton extends Button {
 			@Override
 			public void handle(MouseEvent arg0) {
 				setGraphic(bp);
+				setCursor(Cursor.HAND);
 			}
 		});
 		this.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -47,6 +49,8 @@ public class BaseButton extends Button {
 			@Override
 			public void handle(MouseEvent arg0) {
 				setGraphic(b);
+				setCursor(Cursor.DEFAULT);
+
 			}
 		});
 	}

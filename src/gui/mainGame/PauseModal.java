@@ -6,6 +6,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import logic.GameController;
@@ -25,7 +29,8 @@ public class PauseModal extends VBox {
         setPadding(new Insets(20));
         setSpacing(50);
 
-        setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, getInsets())));
+        setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, new Insets(0))));
+        setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, null, new BorderWidths(5))));
 
         Label header = new Label("Pause...");
         header.setFont(RenderableHolder.getFont(30));
