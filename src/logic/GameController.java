@@ -11,7 +11,6 @@ import entity.base.Particle;
 import entity.base.Tank;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import sharedObject.RenderableHolder;
 
 public class GameController {
     private static GameController instance;
@@ -19,6 +18,7 @@ public class GameController {
     private static int playerScore;
     private static boolean isGameOver;
     private int currentMapId;
+    private double timeFrame;
 
     private GraphicsContext gc;
 
@@ -38,6 +38,7 @@ public class GameController {
         maxEnemy = 0;
         playerScore = 0;
         isGameOver = true;
+        timeFrame = 0;
     }
 
     public static int getMaxEnemy() {
@@ -116,6 +117,7 @@ public class GameController {
         if (!isGameRunning) {
             return;
         }
+        timeFrame++;
 
         int playerLevel = player.getSizeLevel() + player.getMaxHpLevel()
                 + player.getSpeedLevel() + player.getShootCoolDownLevel();
@@ -125,11 +127,6 @@ public class GameController {
         // Clear screen for redrawing
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, Constant.GAME_WIDTH, Constant.GAME_HEIGHT);
-        // for (int i = 0; i < Constant.GAME_WIDTH / 25; i += 1) {
-        // for (int j = 0; j < Constant.GAME_HEIGHT / 25; j += 1) {
-        // gc.drawImage(RenderableHolder.grass, i * 25, j * 25, 25, 25);
-        // }
-        // }
 
         GameUtil.attemptSpawnEnemy(currentNanoTime);
 
@@ -165,6 +162,7 @@ public class GameController {
         particles.clear();
         upgraders.clear();
         playerScore = 0;
+        timeFrame = 0;
         initialize();
     }
 
@@ -206,4 +204,9 @@ public class GameController {
     public void setCurrentMapId(int currentMapId) {
         this.currentMapId = currentMapId;
     }
+
+    public double getTimeFrame() {
+        return timeFrame;
+    }
+
 }
