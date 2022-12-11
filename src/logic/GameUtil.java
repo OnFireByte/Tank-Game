@@ -96,9 +96,9 @@ public class GameUtil {
 
     public static void mapLoader() {
         // load map from image file
-        PixelReader pr = RenderableHolder.map.getPixelReader();
-        for (int i = 0; i < RenderableHolder.map.getWidth(); i++) {
-            for (int j = 0; j < RenderableHolder.map.getHeight(); j++) {
+        PixelReader pr = RenderableHolder.map3.getPixelReader();
+        for (int i = 0; i < RenderableHolder.map3.getWidth(); i++) {
+            for (int j = 0; j < RenderableHolder.map3.getHeight(); j++) {
                 if (toHex(pr.getColor(i, j)).equals("#CCCCCC")) {
                     new BreakableWall(i * 25 + 37.5f, j * 25 + 37.5f, 25);
                 }

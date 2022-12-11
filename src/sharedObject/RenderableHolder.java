@@ -42,8 +42,16 @@ public class RenderableHolder {
 	public static Image sizeUpgrade;
 	public static Image heal;
 	public static Image upgrade;
+	public static Image unbreakableStone;
+	public static Image openingAnimationTank;
+	public static Image grass;
+	
+	//map
+	public static Image map1;
+	public static Image map2;
+	public static Image map3;
 	// font
-	public static Image map;
+	
 	public static Font buttonFont;
 
 	// -------------------------------------------------------------------------------------------------------------------------------//
@@ -109,10 +117,14 @@ public class RenderableHolder {
 		sizeUpgrade = new Image(ClassLoader.getSystemResource(image + "size.gif").toString());
 		heal = new Image(ClassLoader.getSystemResource(image + "heal.gif").toString());
 		upgrade = new Image(ClassLoader.getSystemResource(image + "upgrade.png").toString());
-
+		unbreakableStone = new Image(ClassLoader.getSystemResource(image + "UnbreakableStone.png").toString());
+		openingAnimationTank =  new Image(ClassLoader.getSystemResource(image + "Opening.gif").toString());
+		grass = new Image(ClassLoader.getSystemResource(image + "grass.png").toString());
+		
 		// map image
-		map = new Image(ClassLoader.getSystemResource(image + "map.png").toString());
-
+		map1 = new Image(ClassLoader.getSystemResource(image + "map.png").toString());
+		map2 = new Image(ClassLoader.getSystemResource(image + "map2.png").toString());
+		map3 = new Image(ClassLoader.getSystemResource(image + "map3.png").toString());
 		// audio
 		clickSound = new AudioClip(ClassLoader.getSystemResource(sound + "soundclick.mp3").toString());
 		mainMenuMusic = new AudioClip(ClassLoader.getSystemResource(sound + "mainmenu_music.mp3").toString());
