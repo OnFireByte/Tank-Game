@@ -6,6 +6,7 @@ import common.Constant;
 import common.Direction;
 import entity.BotTank;
 import entity.BreakableWall;
+import entity.PlayerTank;
 import entity.Wall;
 import entity.base.BaseEntity;
 import entity.base.Tank;
@@ -53,6 +54,34 @@ public class GameUtil {
             }
         }
 
+    }
+
+    public static PlayerTank spawnPlayerToRandomPos() {
+        PlayerTank player = new PlayerTank(ThreadLocalRandom.current().nextInt(0, Constant.GAME_WIDTH),
+                ThreadLocalRandom.current().nextInt(41, Constant.GAME_HEIGHT - 40), Direction.LEFT);
+        while (true) {
+            boolean isCollided = false;
+            for (Tank tank : GameController.getInstance().getTanks()) {
+                if (tank != player && GameUtil.isCollided(tank, player)) {
+                    player.setX(ThreadLocalRandom.current().nextInt(0, Constant.GAME_WIDTH));
+                    player.setY(ThreadLocalRandom.current().nextInt(0, Constant.GAME_HEIGHT));
+                    isCollided = true;
+                    break;
+                }
+            }
+            for (Wall wall : GameController.getInstance().getWalls()) {
+                if (GameUtil.isCollided(wall, player)) {
+                    player.setX(ThreadLocalRandom.current().nextInt(0, Constant.GAME_WIDTH));
+                    player.setY(ThreadLocalRandom.current().nextInt(0, Constant.GAME_HEIGHT));
+                    isCollided = true;
+                    break;
+                }
+            }
+            if (!isCollided) {
+                break;
+            }
+        }
+        return player;
     }
 
     public static void attemptSpawnEnemy(long currentNanoTime) {

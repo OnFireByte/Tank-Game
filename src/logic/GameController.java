@@ -167,22 +167,11 @@ public class GameController {
             new Wall(i * 25 + 12.5f, Constant.GAME_HEIGHT - 12.5f, 25);
         }
 
-        // Create breakable walls
+        // Load map
         GameUtil.mapLoader();
-        // for (int i = 0; i < 9; i++) {
-        // for (int j = 1; j < 10; j++) {
-        // new BreakableWall(150 * j, i * 25 + 75 + 12.5f, 25);
-        // }
-        // }
-
-        // for (int i = 0; i < 7; i++) {
-        // for (int j = 1; j < 10; j++) {
-        // new BreakableWall(150 * j, i * 25 + 412.5f, 25);
-        // }
-        // }
 
         // Populate player and enemies
-        player = new PlayerTank(50, 50, Direction.RIGHT);
+        player = GameUtil.spawnPlayerToRandomPos();
         for (int i = 0; i < 5; i++) {
             GameUtil.spawnEnemy();
         }
