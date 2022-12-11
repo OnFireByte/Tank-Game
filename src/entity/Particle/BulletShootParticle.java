@@ -6,7 +6,7 @@ import sharedObject.RenderableHolder;
 public class BulletShootParticle extends Particle {
 
     public BulletShootParticle(float x, float y) {
-        super(20, 20, x - 3f / 4, y - 3f / 4, RenderableHolder.loadNewTankExplosion(), 5);
+        super(20, 20, x, y, RenderableHolder.loadNewTankExplosion(), 5);
 
     }
 }
