@@ -1,8 +1,5 @@
 package gui.mainGame;
 
-import java.lang.System.Logger.Level;
-
-import common.Updatable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -22,6 +19,13 @@ public class UpgradeBox extends VBox {
     private Color bgColor = Color.LIGHTGRAY;
     private Color bgHoverColor = Color.GRAY;
 
+    /**
+     * @param name
+     * @param desc
+     * @param icon
+     * @param level
+     * @param maxLevel
+     */
     public UpgradeBox(String name, String desc, Image icon, int level, int maxLevel) {
         this(name, desc, icon, level, maxLevel, 50);
     }

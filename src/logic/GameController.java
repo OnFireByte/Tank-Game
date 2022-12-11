@@ -3,8 +3,6 @@ package logic;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import common.Constant;
-import common.Direction;
-import entity.BreakableWall;
 import entity.Bullet;
 import entity.PlayerTank;
 import entity.Upgrader;
@@ -16,7 +14,7 @@ import javafx.scene.paint.Color;
 
 public class GameController {
     private static GameController instance;
-    private static int maxEnemy = 10;
+    private static int maxEnemy;
     private static int playerScore;
     private static boolean isGameOver;
 
@@ -35,6 +33,7 @@ public class GameController {
 
     private GameController() {
         isGameRunning = false;
+        maxEnemy = 0;
         playerScore = 0;
     }
 
@@ -114,6 +113,12 @@ public class GameController {
         if (!isGameRunning) {
             return;
         }
+
+        int playerLevel = player.getSizeLevel() + player.getMaxHpLevel()
+                + player.getSpeedLevel() + player.getShootCoolDownLevel();
+
+        maxEnemy = playerLevel / 3 + 5;
+
         // Clear screen for redrawing
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, Constant.GAME_WIDTH, Constant.GAME_HEIGHT);

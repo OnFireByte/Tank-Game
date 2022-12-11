@@ -3,8 +3,6 @@ package common;
 import java.util.Arrays;
 import java.util.List;
 
-import javafx.geometry.Point2D;
-
 public class Constant {
         public static final int GAME_HEIGHT = 600;
         public static final int GAME_WIDTH = 1000;
