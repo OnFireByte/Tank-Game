@@ -2,12 +2,14 @@ package entity;
 
 import common.Constant;
 import common.Direction;
+import entity.Particle.BulletHitParticle;
+import entity.Particle.BulletShootParticle;
 import entity.base.MovableEntity;
 import entity.base.Tank;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.GameController;
-import logic.GameLogic;
+import logic.GameUtil;
 
 public class Bullet extends MovableEntity {
 
@@ -19,6 +21,7 @@ public class Bullet extends MovableEntity {
         this.isPlayerSide = isPlayerSide;
         GameController.getInstance().getBullets().add(this);
         isDestroyed = false;
+        new BulletShootParticle(getX(), getY());
 
     }
 
@@ -80,19 +83,19 @@ public class Bullet extends MovableEntity {
             if (tank.isDestroyed()) {
                 continue;
             }
-            if (GameLogic.isCollided(tank, this)) {
+            if (GameUtil.isCollided(tank, this)) {
                 tank.hit();
+                new BulletHitParticle(getX(), getY());
                 GameController.getInstance().getBullets().remove(this);
                 return;
             }
         }
         for (Wall wall : GameController.getInstance().getWalls()) {
-            if (!(wall instanceof BreakableWall)) {
-                continue;
-            }
-
-            if (GameLogic.isCollided(wall, this)) {
-                ((BreakableWall) wall).hit();
+            if (GameUtil.isCollided(wall, this)) {
+                if (wall instanceof BreakableWall) {
+                    ((BreakableWall) wall).hit();
+                }
+                new BulletHitParticle(getX(), getY());
                 GameController.getInstance().getBullets().remove(this);
                 return;
             }

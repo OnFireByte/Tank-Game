@@ -63,10 +63,7 @@ public class ButtonPane extends VBox {
 				// play audio click
 				RenderableHolder.clickSound.play();
 
-				SceneManager.getInstance().setToMainGame();
-				GameController.getInstance().setGameRunning(true);
-				RenderableHolder.mainMenuMusic.stop();
-				MainMenuScene.mainMenuMusic.stop();
+				SceneManager.getInstance().setToMapSelection();
 			}
 		});
 	}

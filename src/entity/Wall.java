@@ -22,7 +22,7 @@ public class Wall extends BaseEntity {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(RenderableHolder.wall1, x - size / 2, y - size / 2, size, size);
+        gc.drawImage(RenderableHolder.unbreakableStone, x - size / 2, y - size / 2, size, size);
 
     }
 

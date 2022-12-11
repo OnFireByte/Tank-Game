@@ -13,7 +13,7 @@ import sharedObject.RenderableHolder;
 public class MainMenuScene extends Scene {
 
 	private StackPane root;
-	public static AnimationTimer mainMenuMusic;
+	private static AnimationTimer mainMenuMusic;
 
 	public MainMenuScene() {
 
@@ -36,6 +36,15 @@ public class MainMenuScene extends Scene {
 		mainMenuMusic.start();
 
 		root.getChildren().addAll(btn, help);
+	}
+
+	public void startMusic() {
+		mainMenuMusic.start();
+	}
+
+	public void stopMusic() {
+		mainMenuMusic.stop();
+
 	}
 
 }

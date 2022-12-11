@@ -1,14 +1,20 @@
 package gui.mainGame;
 
-import java.lang.System.Logger.Level;
-
-import common.Updatable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -34,7 +40,9 @@ public class UpgradeBox extends VBox {
         setMaxWidth(100);
         setMaxHeight(250);
         setPrefHeight(275);
-        setBackground(new Background(new BackgroundFill(bgColor, null, getInsets())));
+        setBackground(new Background(new BackgroundFill(bgColor, null, new Insets(0))));
+
+        setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, null, new BorderWidths(5))));
 
         ImageView iconView = new ImageView(icon);
         iconView.setFitWidth(size);
@@ -55,11 +63,15 @@ public class UpgradeBox extends VBox {
         getChildren().addAll(iconView, title, levelText, descText);
 
         setOnMouseEntered(e -> {
-            setBackground(new Background(new BackgroundFill(bgHoverColor, null, getInsets())));
+            setBackground(new Background(new BackgroundFill(bgHoverColor, null, Insets.EMPTY)));
+            setCursor(Cursor.HAND);
+
         });
 
         setOnMouseExited(e -> {
-            setBackground(new Background(new BackgroundFill(bgColor, null, getInsets())));
+            setBackground(new Background(new BackgroundFill(bgColor, null, Insets.EMPTY)));
+            setCursor(Cursor.DEFAULT);
+
         });
 
     }

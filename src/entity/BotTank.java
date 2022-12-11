@@ -20,6 +20,7 @@ public class BotTank extends Tank {
         calculateNextDirectionCoolDownCounter = 0;
         sprite = RenderableHolder.tank2;
         bulletSpeed = 5;
+        shootCoolDown = 80;
 
     }
 
@@ -31,6 +32,7 @@ public class BotTank extends Tank {
         calculateNextDirectionCoolDownCounter = 0;
         sprite = RenderableHolder.tank2;
         bulletSpeed = 5;
+        shootCoolDown = 80;
 
     }
 

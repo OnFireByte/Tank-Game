@@ -2,14 +2,14 @@ package entity.base;
 
 import common.Direction;
 import entity.Bullet;
-import entity.ExplosionParticle;
 import entity.Wall;
+import entity.Particle.ExplosionParticle;
 import entity.interfaces.Hittable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.util.Pair;
 import logic.GameController;
-import logic.GameLogic;
+import logic.GameUtil;
 import sharedObject.RenderableHolder;
 
 public abstract class Tank extends MovableEntity implements Hittable {
@@ -29,7 +29,7 @@ public abstract class Tank extends MovableEntity implements Hittable {
     public Tank(float x, float y, float speed, int maxHp, Direction direction, boolean isPlayerSide) {
         super(40, 40, x, y, 2, direction);
         this.isPlayerSide = isPlayerSide;
-        shootCoolDown = 30;
+        shootCoolDown = 50;
         shootCoolDownCounter = 0;
         this.speed = speed;
         GameController.getInstance().getTanks().add(this);
@@ -43,7 +43,7 @@ public abstract class Tank extends MovableEntity implements Hittable {
 
         super(40, 40, x, y, 2, Direction.UP);
         this.isPlayerSide = isPlayerSide;
-        shootCoolDown = 30;
+        shootCoolDown = 50;
         shootCoolDownCounter = 0;
         sprite = RenderableHolder.tank1;
         this.maxHp = maxHp;
@@ -79,7 +79,6 @@ public abstract class Tank extends MovableEntity implements Hittable {
     public void update() {
         if (shootCoolDownCounter > 0) {
             shootCoolDownCounter--;
-
         }
 
         if (shootInput()) {
@@ -244,13 +243,13 @@ public abstract class Tank extends MovableEntity implements Hittable {
 
         }
         for (Tank tank : GameController.getInstance().getTanks()) {
-            if (tank != this && GameLogic.isCollided(tank, this)) {
+            if (tank != this && GameUtil.isCollided(tank, this)) {
                 unforward();
                 break;
             }
         }
         for (Wall wall : GameController.getInstance().getWalls()) {
-            if (GameLogic.isCollided(wall, this)) {
+            if (GameUtil.isCollided(wall, this)) {
                 unforward();
                 break;
             }

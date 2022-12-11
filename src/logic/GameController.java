@@ -3,8 +3,6 @@ package logic;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import common.Constant;
-import common.Direction;
-import entity.BreakableWall;
 import entity.Bullet;
 import entity.PlayerTank;
 import entity.Upgrader;
@@ -16,8 +14,11 @@ import javafx.scene.paint.Color;
 
 public class GameController {
     private static GameController instance;
-    private static int maxEnemy = 10;
+    private static int maxEnemy;
     private static int playerScore;
+    private static boolean isGameOver;
+    private int currentMapId;
+    private double timeFrame;
 
     private GraphicsContext gc;
 
@@ -34,7 +35,10 @@ public class GameController {
 
     private GameController() {
         isGameRunning = false;
+        maxEnemy = 0;
         playerScore = 0;
+        isGameOver = true;
+        timeFrame = 0;
     }
 
     public static int getMaxEnemy() {
@@ -113,11 +117,18 @@ public class GameController {
         if (!isGameRunning) {
             return;
         }
+        timeFrame++;
+
+        int playerLevel = player.getSizeLevel() + player.getMaxHpLevel()
+                + player.getSpeedLevel() + player.getShootCoolDownLevel();
+
+        maxEnemy = playerLevel / 3 + 5;
+
         // Clear screen for redrawing
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, Constant.GAME_WIDTH, Constant.GAME_HEIGHT);
 
-        GameLogic.attemptSpawnEnemy(currentNanoTime);
+        GameUtil.attemptSpawnEnemy(currentNanoTime);
 
         for (Upgrader upgrader : upgraders) {
             upgrader.update();
@@ -151,37 +162,51 @@ public class GameController {
         particles.clear();
         upgraders.clear();
         playerScore = 0;
+        timeFrame = 0;
         initialize();
     }
 
     public void initialize() {
         // Create border walls
-        for (int i = 0; i < 40; i++) {
-            new Wall(i * 25 + 10, 10, 25);
-            new Wall(i * 25 + 10, Constant.GAME_HEIGHT - 10, 25);
-        }
+        isGameOver = false;
         for (int i = 0; i < 24; i++) {
-            new Wall(10, i * 25 + 10, 25);
-            new Wall(Constant.GAME_WIDTH - 10, i * 25 + 10, 25);
+            new Wall(12.5f, i * 25 + 12.5f, 25);
+            new Wall(Constant.GAME_WIDTH - 12.5f, i * 25 + 12.5f, 25);
+        }
+        for (int i = 0; i < 40; i++) {
+            new Wall(i * 25 + 12.5f, 12.5f, 25);
+            new Wall(i * 25 + 12.5f, Constant.GAME_HEIGHT - 12.5f, 25);
         }
 
-        // Create breakable walls
-        for (int i = 0; i < 10; i++) {
-            for (int j = 1; j < 10; j++) {
-                new BreakableWall(160 * j, i * 25 + 80, 25);
-            }
-        }
-
-        for (int i = 0; i < 8; i++) {
-            for (int j = 1; j < 10; j++) {
-                new BreakableWall(160 * j, i * 25 + 400, 25);
-            }
-        }
+        // Load map
+        GameUtil.mapLoader(currentMapId);
 
         // Populate player and enemies
-        player = new PlayerTank(50, 50, Direction.RIGHT);
+        player = GameUtil.spawnPlayerToRandomPos();
         for (int i = 0; i < 5; i++) {
-            GameLogic.spawnEnemy();
+            GameUtil.spawnEnemy();
         }
+
     }
+
+    public static boolean isGameOver() {
+        return isGameOver;
+    }
+
+    public static void setGameOver(boolean isGameOver) {
+        GameController.isGameOver = isGameOver;
+    }
+
+    public int getCurrentMapId() {
+        return currentMapId;
+    }
+
+    public void setCurrentMapId(int currentMapId) {
+        this.currentMapId = currentMapId;
+    }
+
+    public double getTimeFrame() {
+        return timeFrame;
+    }
+
 }

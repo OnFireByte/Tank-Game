@@ -1,7 +1,6 @@
 package gui.mainGame;
 
 import gui.BaseButton;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -11,51 +10,47 @@ import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import logic.GameController;
 import sharedObject.RenderableHolder;
 import sharedObject.SceneManager;
 
-public class EndGameModal extends GridPane {
+public class PauseModal extends VBox {
 
-    public EndGameModal() {
+    public PauseModal() {
         super();
         setVisible(false);
-        setVgap(20);
-        setHgap(20);
-        setPadding(new Insets(50));
+
         setAlignment(Pos.CENTER);
 
-        setMaxHeight(300);
-        setMaxWidth(700);
+        setMaxHeight(400);
+        setMaxWidth(400);
+        setPadding(new Insets(20));
+        setSpacing(50);
+
         setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, new Insets(0))));
         setBorder(new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, null, new BorderWidths(5))));
 
-        Label header = new Label("Game Over...");
+        Label header = new Label("Pause...");
         header.setFont(RenderableHolder.getFont(30));
-        HBox buttonList = new HBox();
-        buttonList.setSpacing(50);
-        buttonList.setPadding(new Insets(20));
-        BaseButton restartButton = new BaseButton("Restart");
-        restartButton.setOnMouseClicked(e -> {
-            GameController.getInstance().reset();
-            setVisible(false);
+
+        BaseButton resumeButton = new BaseButton("Resume");
+        resumeButton.setOnMouseClicked(e -> {
+        	RenderableHolder.clickSound.play();
             GameController.getInstance().setGameRunning(true);
+            setVisible(false);
         });
 
-        BaseButton exitButton = new BaseButton("Go to Main Menu", 300, 50, 15);
-        exitButton.setOnMouseClicked(e -> {
+        BaseButton backButton = new BaseButton("Back to Main Menu", 300, 50, 15);
+        backButton.setOnMouseClicked(e -> {
+        	RenderableHolder.clickSound.play();
             SceneManager.getInstance().setToMainMenu();
             setVisible(false);
         });
 
-        buttonList.getChildren().addAll(restartButton, exitButton);
+        getChildren().addAll(header, resumeButton, backButton);
 
-        add(header, 0, 0);
-        add(buttonList, 0, 1);
-        setHalignment(header, HPos.CENTER);
     }
 
 }

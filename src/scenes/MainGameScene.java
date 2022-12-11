@@ -3,6 +3,7 @@ package scenes;
 import common.Constant;
 import gui.mainGame.EndGameModal;
 import gui.mainGame.GameMenu;
+import gui.mainGame.PauseModal;
 import gui.mainGame.UpgradeModal;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -14,11 +15,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import logic.GameController;
 import logic.InputUtil;
+import sharedObject.RenderableHolder;
 
 public class MainGameScene extends Scene {
 	boolean isEscHold;
 	UpgradeModal upgradeModal;
 	EndGameModal endGameModal;
+	PauseModal pauseModal;
 
 	public MainGameScene() {
 
@@ -36,12 +39,14 @@ public class MainGameScene extends Scene {
 
 		endGameModal = new EndGameModal();
 		upgradeModal = new UpgradeModal();
-		gamePane.getChildren().addAll(upgradeModal, endGameModal);
+		pauseModal = new PauseModal();
+		gamePane.getChildren().addAll(upgradeModal, pauseModal, endGameModal);
 
 		isEscHold = false;
 		setOnKeyPressed(e -> {
-			if (e.getCode() == KeyCode.ESCAPE && !isEscHold) {
+			if (e.getCode() == KeyCode.ESCAPE && !isEscHold && !upgradeModal.isVisible() && !endGameModal.isVisible()) {
 				GameController.getInstance().toggleGameRunning();
+				pauseModal.setVisible(!pauseModal.isVisible());
 				isEscHold = true;
 			}
 			InputUtil.setKeyPressed(e.getCode());
@@ -57,6 +62,11 @@ public class MainGameScene extends Scene {
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long currentNanoTime) {
+				if (!GameController.getInstance().isGameRunning() || GameController.isGameOver()) {
+					RenderableHolder.mainGameMusic.stop();
+				} else if (!RenderableHolder.mainGameMusic.isPlaying()) {
+					RenderableHolder.mainGameMusic.play(0.2);
+				}
 				GameController.getInstance().nextFrame(currentNanoTime);
 				gameMenu.update();
 				upgradeModal.update();
