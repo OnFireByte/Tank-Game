@@ -4,16 +4,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 public class RenderableHolder {
 
 	private static final RenderableHolder instance = new RenderableHolder();
-	private ArrayList<IRenderable> entities;
-	private Comparator<IRenderable> comparator;
 
 	// GIF image
 	public static Image mainMenuGif;
@@ -62,35 +56,11 @@ public class RenderableHolder {
 
 	// -------------------------------------------------------------------------------------------------------------------------------//
 	public RenderableHolder() {
-		entities = new ArrayList<IRenderable>();
-		comparator = (IRenderable o1, IRenderable o2) -> {
-			if (o1.getZ() > o2.getZ())
-				return 1;
-			return -1;
-		};
 	}
 
 	public static RenderableHolder getInstance() {
 		return instance;
 	}
-
-	public void add(IRenderable entity) {
-		entities.add(entity);
-		Collections.sort(entities, comparator);
-	}
-
-	public void update() {
-		for (int i = entities.size() - 1; i >= 0; i--) {
-			if (entities.get(i).isDestroyed())
-				entities.remove(i);
-		}
-	}
-
-	public List<IRenderable> getEntities() {
-		return entities;
-	}
-
-	// -------------------------------------------------------------------------------------------------------------------------------//
 
 	static {
 		loadResource();

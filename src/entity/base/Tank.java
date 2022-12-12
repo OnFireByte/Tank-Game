@@ -277,11 +277,6 @@ public abstract class Tank extends MovableEntity implements Hittable {
         }
     }
 
-    @Override
-    public boolean isDestroyed() {
-        return !isAlive;
-    }
-
     abstract protected Direction getNextDirection();
 
 }

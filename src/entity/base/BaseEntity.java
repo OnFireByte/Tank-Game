@@ -1,9 +1,9 @@
 package entity.base;
 
 import common.Updatable;
-import sharedObject.IRenderable;
+import javafx.scene.canvas.GraphicsContext;
 
-public abstract class BaseEntity implements Updatable, IRenderable {
+public abstract class BaseEntity implements Updatable {
     protected int width;
     protected int height;
     protected float x;
@@ -18,11 +18,6 @@ public abstract class BaseEntity implements Updatable, IRenderable {
         this.width = width;
         this.height = height;
         visible = true;
-    }
-
-    @Override
-    public boolean isVisible() {
-        return visible;
     }
 
     public int getWidth() {
@@ -68,5 +63,7 @@ public abstract class BaseEntity implements Updatable, IRenderable {
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
+
+    public abstract void draw(GraphicsContext gc);
 
 }
