@@ -26,7 +26,6 @@ public abstract class Particle extends BaseEntity {
             GameController.getInstance().getParticles().remove(this);
             return;
         }
-        draw(GameController.getInstance().getGC());
     }
 
     @Override

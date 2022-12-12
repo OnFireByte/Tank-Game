@@ -84,7 +84,7 @@ public class RenderableHolder {
 		String font = "font/";
 
 		// GIF image
-		mainMenuGif = new Image(ClassLoader.getSystemResource(image + "mainmenu.gif").toString(), 1000, 700, false,
+		mainMenuGif = new Image(ClassLoader.getSystemResource(image + "mainmenu.jpg").toString(), 1000, 700, false,
 				false);
 		iconGif = new Image(ClassLoader.getSystemResource(image + "tank.gif").toString());
 
@@ -127,7 +127,8 @@ public class RenderableHolder {
 		explosionSound = new AudioClip(ClassLoader.getSystemResource(sound + "Explode.mp3").toString());
 		gameOverSound = new AudioClip(ClassLoader.getSystemResource(sound + "gameover.mp3").toString());
 		upgradeSound = new AudioClip(ClassLoader.getSystemResource(sound + "upgrade.mp3").toString());
-		mainGameMusic = new MediaPlayer(new Media(ClassLoader.getSystemResource(sound + "mainGame.mp3").toString()));
+		mainGameMusic = new MediaPlayer(new Media(ClassLoader.getSystemResource(sound
+				+ "mainGame.mp3").toString()));
 
 		// font
 		buttonFont = Font.loadFont(ClassLoader.getSystemResource(font + "8bit.ttf").toString(), 100);

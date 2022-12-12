@@ -9,6 +9,7 @@ import entity.Upgrader;
 import entity.Wall;
 import entity.base.Particle;
 import entity.base.Tank;
+import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -20,7 +21,7 @@ public class GameController {
     private static int playerScore;
     private static boolean isGameOver;
     private int currentMapId;
-    private double timeFrame;
+    private long timeFrame;
 
     private GraphicsContext gc;
 
@@ -115,7 +116,7 @@ public class GameController {
         this.isGameRunning = isGameRunning;
     }
 
-    public void nextFrame(long currentNanoTime) {
+    public void nextFrame() {
         if (!isGameRunning) {
             return;
         }
@@ -126,11 +127,7 @@ public class GameController {
 
         maxEnemy = playerLevel / 3 + 5;
 
-        // Clear screen for redrawing
-        gc.setFill(Color.BLACK);
-        gc.fillRect(0, 0, Constant.GAME_WIDTH, Constant.GAME_HEIGHT);
-
-        GameUtil.attemptSpawnEnemy(currentNanoTime);
+        GameUtil.attemptSpawnEnemy(timeFrame);
 
         for (Upgrader upgrader : upgraders) {
             upgrader.update();
@@ -146,6 +143,33 @@ public class GameController {
         }
         for (Particle particle : particles) {
             particle.update();
+        }
+        Platform.runLater(() -> {
+            drawFrame();
+        });
+    }
+
+    public void drawFrame() {
+        if (!isGameRunning) {
+            return;
+        }
+        // Clear screen for redrawing
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0, 0, Constant.GAME_WIDTH, Constant.GAME_HEIGHT);
+        for (Upgrader upgrader : upgraders) {
+            upgrader.draw(getGC());
+        }
+        for (Tank tank : tanks) {
+            tank.draw(getGC());
+        }
+        for (Bullet bullet : bullets) {
+            bullet.draw(getGC());
+        }
+        for (Wall wall : walls) {
+            wall.draw(getGC());
+        }
+        for (Particle particle : particles) {
+            particle.draw(getGC());
         }
     }
 

@@ -33,7 +33,6 @@ public class Upgrader extends BaseEntity {
             return;
         }
         decreaseExpireCounter();
-        draw(GameController.getInstance().getGC());
     }
 
     public boolean isExpired() {

@@ -88,7 +88,6 @@ public abstract class Tank extends MovableEntity implements Hittable {
         if (hitCounter > 0) {
             hitCounter--;
         }
-        draw(GameController.getInstance().getGC(), hitCounter > 0);
 
     }
 
@@ -98,7 +97,7 @@ public abstract class Tank extends MovableEntity implements Hittable {
 
     @Override
     public void draw(GraphicsContext gc) {
-        draw(gc, false);
+        draw(gc, hitCounter > 0);
     }
 
     public void draw(GraphicsContext gc, boolean isHitted) {

@@ -28,7 +28,6 @@ public class Wall extends BaseEntity {
 
     @Override
     public void update() {
-        draw(GameController.getInstance().getGC());
     }
 
 }
