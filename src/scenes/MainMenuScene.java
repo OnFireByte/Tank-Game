@@ -2,7 +2,7 @@ package scenes;
 
 import common.Constant;
 import gui.mainMenu.HelpPane;
-import gui.mainMenu.MainmenuPane;
+import gui.mainMenu.MainMenuPane;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -23,7 +23,7 @@ public class MainMenuScene extends Scene {
 		setRoot(root);
 
 		HelpPane help = new HelpPane();
-		MainmenuPane btn = new MainmenuPane(help);
+		MainMenuPane btn = new MainMenuPane(help);
 
 		mainMenuMusic = new AnimationTimer() {
 			@Override
