@@ -30,14 +30,12 @@ public class ButtonPane extends VBox {
 
 		// Name
 		Button txt = new Button("Tank Game");
-		txt.setFont(RenderableHolder.getFont(20));
+		txt.setFont(RenderableHolder.getFont(40));
 		ImageView t = new ImageView(RenderableHolder.txtFrame);
 		txt.setBackground(null);
 		txt.setPadding(Insets.EMPTY);
 		txt.setContentDisplay(ContentDisplay.CENTER);
 		txt.setGraphic(t);
-
-		txt.setFont(RenderableHolder.getFont(40));
 
 		// play button
 		initializeStartButton();

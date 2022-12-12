@@ -22,7 +22,7 @@ public class HelpPane extends StackPane{
 		this.isShowed = false;
 		
 		HBox closeButtonPane = new HBox();
-		closeButtonPane.setPadding(new Insets(30, 120, 0, 700));
+		closeButtonPane.setPadding(new Insets(50, 200, 0, 700));
 	
 		//---------------------------close button-----------------------------------------------------------------------------------------
 		BaseButton btn = new BaseButton("X" , 40 , 40);

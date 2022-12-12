@@ -107,7 +107,7 @@ public class RenderableHolder {
 		iconGif = new Image(ClassLoader.getSystemResource(image + "tank.gif").toString());
 
 		// image
-		test = new Image(ClassLoader.getSystemResource(image + "test.jpg").toString(), 700, 500, false, false);
+		test = new Image(ClassLoader.getSystemResource(image + "test.png").toString(), 700, 500, false, false);
 		wall1 = new Image(ClassLoader.getSystemResource(image + "Wall1.jpg").toString());
 		wall2 = new Image(ClassLoader.getSystemResource(image + "Wall2.jpg").toString());
 		tank1 = new Image(ClassLoader.getSystemResource(image + "Tank1.gif").toString());
