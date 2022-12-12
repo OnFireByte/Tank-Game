@@ -35,12 +35,6 @@ public abstract class Particle extends BaseEntity {
 
     }
 
-    @Override
-    public boolean isDestroyed() {
-
-        return visible;
-    }
-
     public int getLifeTime() {
         return lifeTime;
     }

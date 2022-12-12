@@ -80,9 +80,6 @@ public class Bullet extends MovableEntity {
             if (tank.isPlayerSide() == isPlayerSide) {
                 continue;
             }
-            if (tank.isDestroyed()) {
-                continue;
-            }
             if (GameUtil.isCollided(tank, this)) {
                 tank.hit();
                 new BulletHitParticle(getX(), getY());
@@ -100,11 +97,6 @@ public class Bullet extends MovableEntity {
                 return;
             }
         }
-    }
-
-    @Override
-    public boolean isDestroyed() {
-        return isDestroyed;
     }
 
 }

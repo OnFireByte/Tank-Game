@@ -28,11 +28,6 @@ public class Upgrader extends BaseEntity {
     }
 
     @Override
-    public boolean isDestroyed() {
-        return !isExpired();
-    }
-
-    @Override
     public void update() {
         if (isExpired()) {
             GameController.getInstance().getUpgraders().remove(this);

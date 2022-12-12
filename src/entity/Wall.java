@@ -27,11 +27,6 @@ public class Wall extends BaseEntity {
     }
 
     @Override
-    public boolean isDestroyed() {
-        return false;
-    }
-
-    @Override
     public void update() {
         draw(GameController.getInstance().getGC());
     }

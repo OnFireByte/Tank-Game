@@ -28,11 +28,6 @@ public class PlayerTank extends Tank {
     }
 
     @Override
-    public boolean isDestroyed() {
-        return false;
-    }
-
-    @Override
     protected Direction getNextDirection() {
         return InputUtil.getPlayerKeyDirection();
     }
