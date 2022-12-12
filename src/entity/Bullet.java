@@ -56,7 +56,6 @@ public class Bullet extends MovableEntity {
             return;
         }
 
-        draw(GameController.getInstance().getGC());
 
     }
 

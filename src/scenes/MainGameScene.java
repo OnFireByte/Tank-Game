@@ -1,11 +1,15 @@
 package scenes;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import common.Constant;
 import gui.mainGame.EndGameModal;
 import gui.mainGame.GameMenu;
 import gui.mainGame.PauseModal;
 import gui.mainGame.UpgradeModal;
 import javafx.animation.AnimationTimer;
+
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -59,20 +63,29 @@ public class MainGameScene extends Scene {
 			InputUtil.setKeyReleased(e.getCode());
 		});
 
-		AnimationTimer timer = new AnimationTimer() {
+		AnimationTimer animationTimer = new AnimationTimer() {
 			@Override
-			public void handle(long currentNanoTime) {
-				if (!GameController.getInstance().isGameRunning() || GameController.isGameOver()) {
+			public void handle(long now) {
+				if (!GameController.getInstance().isGameRunning() ||
+						GameController.isGameOver()) {
 					RenderableHolder.mainGameMusic.pause();
 				} else {
 					RenderableHolder.mainGameMusic.play();
 				}
-				GameController.getInstance().nextFrame(currentNanoTime);
 				gameMenu.update();
 				upgradeModal.update();
 			}
 		};
-		timer.start();
+		animationTimer.start();
+		Timer timer = new Timer("Game timer");
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				GameController.getInstance().nextFrame();
+			}
+
+		}, 0, 1000 / 60);
+
 	}
 
 	public void openUpgradeModal() {
