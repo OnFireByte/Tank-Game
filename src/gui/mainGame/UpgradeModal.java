@@ -21,7 +21,7 @@ public class UpgradeModal extends GridPane implements Updatable {
 
     public UpgradeModal() {
         super();
-        // setVisible(false);
+        setVisible(false);
         sizeBox = new UpgradeBox("Size", "Make your tank smaller, easier to dodge. Less is more_",
                 RenderableHolder.sizeUpgrade,
                 GameController.getInstance().getPlayer().getSizeLevel(), Constant.MAX_UPGRADE_LEVEL);
