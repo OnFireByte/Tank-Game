@@ -63,9 +63,9 @@ public class MainGameScene extends Scene {
 			@Override
 			public void handle(long currentNanoTime) {
 				if (!GameController.getInstance().isGameRunning() || GameController.isGameOver()) {
-					RenderableHolder.mainGameMusic.stop();
-				} else if (!RenderableHolder.mainGameMusic.isPlaying()) {
-					RenderableHolder.mainGameMusic.play(0.2);
+					RenderableHolder.mainGameMusic.pause();
+				} else {
+					RenderableHolder.mainGameMusic.play();
 				}
 				GameController.getInstance().nextFrame(currentNanoTime);
 				gameMenu.update();

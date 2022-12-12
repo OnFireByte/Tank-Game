@@ -3,7 +3,11 @@ package sharedObject;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,7 +30,7 @@ public class RenderableHolder {
 	public static AudioClip explosionSound;
 	public static AudioClip gameOverSound;
 	public static AudioClip upgradeSound;
-	public static AudioClip mainGameMusic;
+	public static MediaPlayer mainGameMusic;
 
 	// image
 	public static Image test;
@@ -94,6 +98,12 @@ public class RenderableHolder {
 
 	static {
 		loadResource();
+		mainGameMusic.setOnEndOfMedia(new Runnable() {
+			public void run() {
+				mainGameMusic.seek(Duration.ZERO);
+			}
+		});
+		mainGameMusic.setVolume(0.4);
 	}
 
 	public static void loadResource() {
@@ -142,7 +152,7 @@ public class RenderableHolder {
 		explosionSound = new AudioClip(ClassLoader.getSystemResource(sound + "Explode.mp3").toString());
 		gameOverSound = new AudioClip(ClassLoader.getSystemResource(sound + "gameover.mp3").toString());
 		upgradeSound = new AudioClip(ClassLoader.getSystemResource(sound + "upgrade.mp3").toString());
-		mainGameMusic = new AudioClip(ClassLoader.getSystemResource(sound + "mainGame.mp3").toString());
+		mainGameMusic = new MediaPlayer(new Media(ClassLoader.getSystemResource(sound + "mainGame.mp3").toString()));
 
 		// font
 		buttonFont = Font.loadFont(ClassLoader.getSystemResource(font + "8bit.ttf").toString(), 100);

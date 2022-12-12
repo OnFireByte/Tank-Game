@@ -11,6 +11,8 @@ import entity.base.Particle;
 import entity.base.Tank;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
+import sharedObject.RenderableHolder;
 
 public class GameController {
     private static GameController instance;
@@ -164,6 +166,7 @@ public class GameController {
         playerScore = 0;
         timeFrame = 0;
         initialize();
+        RenderableHolder.mainGameMusic.seek(Duration.ZERO);
     }
 
     public void initialize() {
