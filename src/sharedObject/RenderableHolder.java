@@ -84,7 +84,7 @@ public class RenderableHolder {
 		String font = "font/";
 
 		// GIF image
-		mainMenuGif = new Image(ClassLoader.getSystemResource(image + "mainmenu.jpg").toString(), 1000, 700, false,
+		mainMenuGif = new Image(ClassLoader.getSystemResource(image + "mainmenu.gif").toString(), 1000, 700, false,
 				false);
 		iconGif = new Image(ClassLoader.getSystemResource(image + "tank.gif").toString());
 
