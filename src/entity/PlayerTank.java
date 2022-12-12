@@ -1,11 +1,8 @@
 package entity;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 import common.Constant;
 import common.Direction;
 import entity.base.Tank;
-import javafx.scene.Scene;
 import logic.GameController;
 import logic.GameUtil;
 import logic.InputUtil;

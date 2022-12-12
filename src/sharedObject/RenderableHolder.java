@@ -8,7 +8,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
-
 public class RenderableHolder {
 
 	private static final RenderableHolder instance = new RenderableHolder();
@@ -49,6 +48,9 @@ public class RenderableHolder {
 	public static Image map1Preview;
 	public static Image map2Preview;
 	public static Image map3Preview;
+	public static Image modalBackGround;
+	public static Image box;
+	public static Image hoveredBox;
 
 	// map
 	public static Image map1;
@@ -109,6 +111,9 @@ public class RenderableHolder {
 		map1Preview = new Image(ClassLoader.getSystemResource(image + "map1preview.png").toString());
 		map2Preview = new Image(ClassLoader.getSystemResource(image + "map2preview.png").toString());
 		map3Preview = new Image(ClassLoader.getSystemResource(image + "map3preview.png").toString());
+		modalBackGround = new Image(ClassLoader.getSystemResource(image + "modalBG.png").toString());
+		box = new Image(ClassLoader.getSystemResource(image + "box.png").toString());
+		hoveredBox = new Image(ClassLoader.getSystemResource(image + "hoveredBox.png").toString());
 
 		// map image
 		map1 = new Image(ClassLoader.getSystemResource(image + "map.png").toString());

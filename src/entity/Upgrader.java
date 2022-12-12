@@ -2,7 +2,6 @@ package entity;
 
 import entity.base.BaseEntity;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import logic.GameController;
 import sharedObject.RenderableHolder;
 

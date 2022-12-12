@@ -4,9 +4,11 @@ import common.Constant;
 import common.Updatable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import logic.GameController;
 import sharedObject.RenderableHolder;
 
@@ -19,7 +21,7 @@ public class UpgradeModal extends GridPane implements Updatable {
 
     public UpgradeModal() {
         super();
-        setVisible(false);
+        // setVisible(false);
         sizeBox = new UpgradeBox("Size", "Make your tank smaller, easier to dodge. Less is more_",
                 RenderableHolder.sizeUpgrade,
                 GameController.getInstance().getPlayer().getSizeLevel(), Constant.MAX_UPGRADE_LEVEL);
@@ -36,9 +38,14 @@ public class UpgradeModal extends GridPane implements Updatable {
 
         healBox = new UpgradeBox("Heal", "Heal your tank, get back to the battlefield!", RenderableHolder.heal, 0, 0);
 
-        setBackground(new Background(new BackgroundFill(Color.GRAY, null, new Insets(0))));
-        setMaxHeight(500);
-        setMaxWidth(600);
+        setMaxHeight(550);
+        setMaxWidth(800);
+        setPadding(new Insets(80));
+        setVgap(5);
+        setHgap(5);
+        setBackground(new Background(new BackgroundImage(RenderableHolder.modalBackGround, BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(800, 500, isFocusTraversable(), isDisabled(), isDisable(), isCache()))));
 
         sizeBox.setOnMouseClicked(e -> {
             if (GameController.getInstance().getPlayer().getSizeLevel() == Constant.MAX_UPGRADE_LEVEL) {
