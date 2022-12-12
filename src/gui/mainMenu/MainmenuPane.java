@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import sharedObject.RenderableHolder;
 import sharedObject.SceneManager;
 
-public class ButtonPane extends VBox {
+public class MainmenuPane extends VBox {
 
 	private BaseButton startButton;
 	private BaseButton helpButton;
@@ -20,7 +20,7 @@ public class ButtonPane extends VBox {
 
 	private HelpPane helpPane;
 
-	public ButtonPane(HelpPane helpPane) {
+	public MainmenuPane(HelpPane helpPane) {
 		super();
 		this.setAlignment(Pos.TOP_CENTER);
 		this.setSpacing(30);
