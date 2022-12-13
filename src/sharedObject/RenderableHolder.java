@@ -150,7 +150,7 @@ public class RenderableHolder {
 	}
 
 	public static Image loadNewTankExplosion() {
-		// Need to load new Image because they aren't restart.s
+		// Need to load new Image because they aren't restart.
 		return new Image(ClassLoader.getSystemResource("images/explosion.gif").toString());
 
 	}

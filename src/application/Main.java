@@ -1,10 +1,7 @@
 
 package application;
 
-import java.beans.EventHandler;
-
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import sharedObject.RenderableHolder;
@@ -16,12 +13,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setOnCloseRequest((WindowEvent e) -> {
-			System.out.println("test");
-			try {
-				System.exit(0);
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+			System.exit(0);
 		});
 
 		SceneManager.injectStage(primaryStage);
