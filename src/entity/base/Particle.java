@@ -11,7 +11,7 @@ public abstract class Particle extends BaseEntity {
     private Image image;
 
     public Particle(int width, int height, float x, float y, Image image, int lifeTime) {
-        super(width, height, x, y, 11);
+        super(width, height, x, y);
         this.lifeTime = lifeTime;
         this.lifeTimeCounter = lifeTime;
         this.image = image;

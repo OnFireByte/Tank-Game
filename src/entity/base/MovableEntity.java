@@ -7,7 +7,7 @@ public abstract class MovableEntity extends BaseEntity {
     protected Direction direction;
 
     public MovableEntity(int width, int height, float x, float y, float speed, Direction direction) {
-        super(width, height, x, y, 10);
+        super(width, height, x, y);
         this.speed = speed;
         this.direction = direction;
     }
@@ -29,11 +29,6 @@ public abstract class MovableEntity extends BaseEntity {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
-    }
-
-    @Override
-    public int getZ() {
-        return 10;
     }
 
 }

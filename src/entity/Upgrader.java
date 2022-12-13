@@ -11,7 +11,7 @@ public class Upgrader extends BaseEntity {
     private int expireCounter;
 
     public Upgrader(float x, float y, int expireTime) {
-        super(20, 20, x, y, 9);
+        super(20, 20, x, y);
         this.expireTime = expireTime;
         expireCounter = expireTime;
         GameController.getInstance().getUpgraders().add(this);

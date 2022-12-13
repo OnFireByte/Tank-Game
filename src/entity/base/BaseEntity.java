@@ -8,13 +8,11 @@ public abstract class BaseEntity implements Updatable {
     protected int height;
     protected float x;
     protected float y;
-    protected int z;
     protected boolean visible;
 
-    public BaseEntity(int width, int height, float x, float y, int z) {
+    public BaseEntity(int width, int height, float x, float y) {
         this.x = x;
         this.y = y;
-        this.z = z;
         this.width = width;
         this.height = height;
         visible = true;
@@ -48,16 +46,8 @@ public abstract class BaseEntity implements Updatable {
         return y;
     }
 
-    public int getZ() {
-        return z;
-    }
-
     public void setY(float y) {
         this.y = y;
-    }
-
-    public void setZ(int z) {
-        this.z = z;
     }
 
     public void setVisible(boolean visible) {

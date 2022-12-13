@@ -10,14 +10,9 @@ public class Wall extends BaseEntity {
     protected int size;
 
     public Wall(float x, float y, int size) {
-        super(size, size, x, y, 10);
+        super(size, size, x, y);
         this.size = size;
         GameController.getInstance().getWalls().add(this);
-    }
-
-    @Override
-    public int getZ() {
-        return 10;
     }
 
     @Override
