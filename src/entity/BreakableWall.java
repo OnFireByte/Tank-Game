@@ -17,16 +17,24 @@ public class BreakableWall extends Wall implements Hittable {
     private int respawnTime = 15 * 60;
     private int respawnTimeCounter = 0;
 
+    public BreakableWall(float x, float y, int size) {
+        super(x, y, size);
+        this.maxHp = 2;
+        this.hp = maxHp;
+    }
+
     public BreakableWall(float x, float y, int size, int hp) {
         super(x, y, size);
         this.hp = hp;
         this.maxHp = hp;
     }
 
-    public BreakableWall(float x, float y, int size) {
-        super(x, y, size);
-        this.maxHp = 2;
-        this.hp = maxHp;
+    @Override
+    public void draw(GraphicsContext gc) {
+        if (!isBroken) {
+            Image wall = hp == maxHp ? RenderableHolder.wall1 : RenderableHolder.wall2;
+            gc.drawImage(wall, x - size / 2, y - size / 2, size, size);
+        }
     }
 
     @Override
@@ -36,6 +44,14 @@ public class BreakableWall extends Wall implements Hittable {
             isBroken = true;
             respawnTimeCounter = respawnTime;
         }
+    }
+
+    public boolean isBroken() {
+        return isBroken;
+    }
+
+    public void setBroken(boolean isBroken) {
+        this.isBroken = isBroken;
     }
 
     @Override
@@ -56,22 +72,6 @@ public class BreakableWall extends Wall implements Hittable {
             }
         }
         super.update();
-    }
-
-    @Override
-    public void draw(GraphicsContext gc) {
-        if (!isBroken) {
-            Image wall = hp == maxHp ? RenderableHolder.wall1 : RenderableHolder.wall2;
-            gc.drawImage(wall, x - size / 2, y - size / 2, size, size);
-        }
-    }
-
-    public boolean isBroken() {
-        return isBroken;
-    }
-
-    public void setBroken(boolean isBroken) {
-        this.isBroken = isBroken;
     }
 
 }

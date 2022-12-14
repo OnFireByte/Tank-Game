@@ -50,51 +50,6 @@ public abstract class Tank extends MovableEntity implements Hittable {
         hp = maxHp;
     }
 
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        if (hp > maxHp) {
-            hp = maxHp;
-        }
-        if (hp < 0) {
-            hp = 0;
-        }
-        this.hp = hp;
-    }
-
-    public int getMaxHp() {
-        return maxHp;
-    }
-
-    public void setMaxHp(int hp) {
-        if (hp < 1) {
-            hp = 1;
-        }
-        this.maxHp = hp;
-    }
-
-    @Override
-    public void update() {
-        if (shootCoolDownCounter > 0) {
-            shootCoolDownCounter--;
-        }
-
-        if (shootInput()) {
-            shoot();
-        }
-        forward();
-        if (hitCounter > 0) {
-            hitCounter--;
-        }
-
-    }
-
-    public boolean isPlayerSide() {
-        return isPlayerSide;
-    }
-
     @Override
     public void draw(GraphicsContext gc) {
         draw(gc, hitCounter > 0);
@@ -128,91 +83,6 @@ public abstract class Tank extends MovableEntity implements Hittable {
                 height);
         gc.restore();
 
-    }
-
-    public Pair<Float, Float> getFacePos() {
-        float fx;
-        float fy;
-        switch (direction) {
-            case UP:
-                fx = x;
-                fy = y - height / 2;
-                break;
-
-            case DOWN:
-                fx = x;
-                fy = y + height / 2;
-                break;
-            case LEFT:
-                fx = x - width / 2;
-                fy = y;
-                break;
-            case RIGHT:
-                fx = x + width / 2;
-                fy = y;
-                break;
-
-            default:
-                fx = x;
-                fy = y;
-                break;
-        }
-        return new Pair<Float, Float>(fx, fy);
-    }
-
-    public void setPlayerSide(boolean isPlayerSide) {
-        this.isPlayerSide = isPlayerSide;
-    }
-
-    public int getShootCoolDown() {
-        return shootCoolDown;
-    }
-
-    public void setShootCoolDown(int shootCoolDown) {
-        if (shootCoolDown < 0) {
-            shootCoolDown = 0;
-        }
-        this.shootCoolDown = shootCoolDown;
-    }
-
-    public int getShootCoolDownCounter() {
-        return shootCoolDownCounter;
-    }
-
-    public void setShootCoolDownCounter(int shootCoolDownCounter) {
-        if (shootCoolDownCounter < 0) {
-            shootCoolDownCounter = 0;
-        }
-        this.shootCoolDownCounter = shootCoolDownCounter;
-    }
-
-    @Override
-    public void hit() {
-        hitCounter = hitFrame;
-        draw(GameController.getInstance().getGC(), true);
-        setHp(hp - 1);
-        if (hp <= 0) {
-            kill();
-        }
-
-    }
-
-    public void kill() {
-        GameController.getInstance().getTanks().remove(this);
-        isAlive = false;
-        new ExplosionParticle(x, y);
-    }
-
-    abstract protected boolean shootInput();
-
-    protected void shoot() {
-        if (shootCoolDownCounter > 0) {
-            return;
-        }
-        Pair<Float, Float> pair = getFacePos();
-        new Bullet(pair.getKey(), pair.getValue(), bulletSpeed, direction, isPlayerSide);
-
-        shootCoolDownCounter = shootCoolDown;
     }
 
     protected void forward() {
@@ -255,6 +125,122 @@ public abstract class Tank extends MovableEntity implements Hittable {
         }
     }
 
+    public Pair<Float, Float> getFacePos() {
+        float fx;
+        float fy;
+        switch (direction) {
+            case UP:
+                fx = x;
+                fy = y - height / 2;
+                break;
+
+            case DOWN:
+                fx = x;
+                fy = y + height / 2;
+                break;
+            case LEFT:
+                fx = x - width / 2;
+                fy = y;
+                break;
+            case RIGHT:
+                fx = x + width / 2;
+                fy = y;
+                break;
+
+            default:
+                fx = x;
+                fy = y;
+                break;
+        }
+        return new Pair<>(fx, fy);
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    abstract protected Direction getNextDirection();
+
+    public int getShootCoolDown() {
+        return shootCoolDown;
+    }
+
+    public int getShootCoolDownCounter() {
+        return shootCoolDownCounter;
+    }
+
+    @Override
+    public void hit() {
+        hitCounter = hitFrame;
+        draw(GameController.getInstance().getGC(), true);
+        setHp(hp - 1);
+        if (hp <= 0) {
+            kill();
+        }
+
+    }
+
+    public boolean isPlayerSide() {
+        return isPlayerSide;
+    }
+
+    public void kill() {
+        GameController.getInstance().getTanks().remove(this);
+        isAlive = false;
+        new ExplosionParticle(x, y);
+    }
+
+    public void setHp(int hp) {
+        if (hp > maxHp) {
+            hp = maxHp;
+        }
+        if (hp < 0) {
+            hp = 0;
+        }
+        this.hp = hp;
+    }
+
+    public void setMaxHp(int hp) {
+        if (hp < 1) {
+            hp = 1;
+        }
+        this.maxHp = hp;
+    }
+
+    public void setPlayerSide(boolean isPlayerSide) {
+        this.isPlayerSide = isPlayerSide;
+    }
+
+    public void setShootCoolDown(int shootCoolDown) {
+        if (shootCoolDown < 0) {
+            shootCoolDown = 0;
+        }
+        this.shootCoolDown = shootCoolDown;
+    }
+
+    public void setShootCoolDownCounter(int shootCoolDownCounter) {
+        if (shootCoolDownCounter < 0) {
+            shootCoolDownCounter = 0;
+        }
+        this.shootCoolDownCounter = shootCoolDownCounter;
+    }
+
+    protected void shoot() {
+        if (shootCoolDownCounter > 0) {
+            return;
+        }
+        Pair<Float, Float> pair = getFacePos();
+        new Bullet(pair.getKey(), pair.getValue(), bulletSpeed, direction, isPlayerSide);
+
+        shootCoolDownCounter = shootCoolDown;
+    }
+
+    abstract protected boolean shootInput();
+
     protected void unforward() {
 
         switch (direction) {
@@ -276,6 +262,20 @@ public abstract class Tank extends MovableEntity implements Hittable {
         }
     }
 
-    abstract protected Direction getNextDirection();
+    @Override
+    public void update() {
+        if (shootCoolDownCounter > 0) {
+            shootCoolDownCounter--;
+        }
+
+        if (shootInput()) {
+            shoot();
+        }
+        forward();
+        if (hitCounter > 0) {
+            hitCounter--;
+        }
+
+    }
 
 }

@@ -19,16 +19,6 @@ public abstract class Particle extends BaseEntity {
     }
 
     @Override
-    public void update() {
-        lifeTimeCounter--;
-        if (lifeTimeCounter <= 0) {
-            visible = false;
-            GameController.getInstance().getParticles().remove(this);
-            return;
-        }
-    }
-
-    @Override
     public void draw(GraphicsContext gc) {
         gc.drawImage(image, x - width / 2, y - height / 2, width, height);
 
@@ -40,5 +30,15 @@ public abstract class Particle extends BaseEntity {
 
     public void setLifeTime(int lifeTime) {
         this.lifeTime = lifeTime;
+    }
+
+    @Override
+    public void update() {
+        lifeTimeCounter--;
+        if (lifeTimeCounter <= 0) {
+            visible = false;
+            GameController.getInstance().getParticles().remove(this);
+            return;
+        }
     }
 }

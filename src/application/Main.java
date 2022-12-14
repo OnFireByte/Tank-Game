@@ -2,13 +2,17 @@
 package application;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import sharedObject.RenderableHolder;
 import sharedObject.SceneManager;
-import javafx.scene.Scene;
 
 public class Main extends Application {
+
+	public static void main(String[] args) {
+		launch(args);
+	}
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -25,9 +29,5 @@ public class Main extends Application {
 		primaryStage.getIcons().add(RenderableHolder.iconGif);
 		primaryStage.setResizable(false);
 		primaryStage.show();
-	}
-
-	public static void main(String[] args) {
-		launch(args);
 	}
 }

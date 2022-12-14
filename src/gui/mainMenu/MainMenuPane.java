@@ -49,26 +49,16 @@ public class MainMenuPane extends VBox {
 		this.getChildren().addAll(txt, startButton, helpButton, exitButton);
 	}
 
-	public void initializeStartButton() {
-		startButton = new BaseButton("Play", 190, 50);
-		startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent arg0) {
-				// play audio click
-				RenderableHolder.clickSound.play();
-
-				SceneManager.getInstance().setToMapSelection();
-			}
-		});
+	public BaseButton getExitButton() {
+		return exitButton;
 	}
 
-	public void initializeHelpButton() {
+	public BaseButton getHelpButton() {
+		return helpButton;
+	}
 
-		helpButton = new BaseButton("Help", 190, 50);
-		helpButton.setOnMouseClicked(arg0 -> {
-			RenderableHolder.clickSound.play();
-			helpPane.showHelpPane();
-		});
+	public BaseButton getStartButton() {
+		return startButton;
 	}
 
 	public void initializeExitButton() {
@@ -86,16 +76,26 @@ public class MainMenuPane extends VBox {
 		});
 	}
 
-	public BaseButton getStartButton() {
-		return startButton;
+	public void initializeHelpButton() {
+
+		helpButton = new BaseButton("Help", 190, 50);
+		helpButton.setOnMouseClicked(arg0 -> {
+			RenderableHolder.clickSound.play();
+			helpPane.showHelpPane();
+		});
 	}
 
-	public BaseButton getHelpButton() {
-		return helpButton;
-	}
+	public void initializeStartButton() {
+		startButton = new BaseButton("Play", 190, 50);
+		startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent arg0) {
+				// play audio click
+				RenderableHolder.clickSound.play();
 
-	public BaseButton getExitButton() {
-		return exitButton;
+				SceneManager.getInstance().setToMapSelection();
+			}
+		});
 	}
 
 }

@@ -17,11 +17,18 @@ import javafx.scene.paint.Color;
 import sharedObject.RenderableHolder;
 
 public class GameUtil {
-    public static boolean isCollided(BaseEntity a, BaseEntity b) {
-        if (a instanceof BreakableWall && ((BreakableWall) a).isBroken()) {
-            return false;
+    public static void attemptSpawnEnemy(long currentNanoTime) {
+        if (currentNanoTime % 60 != 0) {
+            return;
         }
-        if (b instanceof BreakableWall && ((BreakableWall) b).isBroken()) {
+        if (GameController.getInstance().getTanks().size() - 1 < GameController.getMaxEnemy()
+                && ThreadLocalRandom.current().nextInt(0, 2) == 0) {
+            spawnEnemy();
+        }
+    }
+
+    public static boolean isCollided(BaseEntity a, BaseEntity b) {
+        if ((a instanceof BreakableWall && ((BreakableWall) a).isBroken()) || (b instanceof BreakableWall && ((BreakableWall) b).isBroken())) {
             return false;
         }
         return (a.getX() - a.getWidth() / 2) < (b.getX() + b.getWidth() / 2)
@@ -30,9 +37,23 @@ public class GameUtil {
                 && (a.getY() + a.getHeight() / 2) > (b.getY() - b.getHeight() / 2);
     }
 
+    public static void mapLoader(int idx) {
+        // load map from image file
+        Image img = RenderableHolder.getMap(idx);
+        PixelReader pr = img.getPixelReader();
+        for (int i = 0; i < img.getWidth(); i++) {
+            for (int j = 0; j < img.getHeight(); j++) {
+                if (toHex(pr.getColor(i, j)).equals("#CCCCCC")) {
+                    new BreakableWall(i * 25 + 37.5f, j * 25 + 37.5f, 25);
+                }
+            }
+        }
+
+    }
+
     public static void spawnEnemy() {
         var a = new BotTank(ThreadLocalRandom.current().nextInt(0, Constant.GAME_WIDTH),
-                ThreadLocalRandom.current().nextInt(41, Constant.GAME_HEIGHT - 40), (float) 1, Direction.LEFT);
+                ThreadLocalRandom.current().nextInt(41, Constant.GAME_HEIGHT - 40), 1, Direction.LEFT);
         while (true) {
             boolean isCollided = false;
             for (Tank tank : GameController.getInstance().getTanks()) {
@@ -85,30 +106,6 @@ public class GameUtil {
             }
         }
         return player;
-    }
-
-    public static void attemptSpawnEnemy(long currentNanoTime) {
-        if (currentNanoTime % 60 != 0) {
-            return;
-        }
-        if (GameController.getInstance().getTanks().size() - 1 < GameController.getMaxEnemy()
-                && ThreadLocalRandom.current().nextInt(0, 2) == 0) {
-            spawnEnemy();
-        }
-    }
-
-    public static void mapLoader(int idx) {
-        // load map from image file
-        Image img = RenderableHolder.getMap(idx);
-        PixelReader pr = img.getPixelReader();
-        for (int i = 0; i < img.getWidth(); i++) {
-            for (int j = 0; j < img.getHeight(); j++) {
-                if (toHex(pr.getColor(i, j)).equals("#CCCCCC")) {
-                    new BreakableWall(i * 25 + 37.5f, j * 25 + 37.5f, 25);
-                }
-            }
-        }
-
     }
 
     public static String toHex(Color color) {

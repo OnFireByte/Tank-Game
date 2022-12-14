@@ -25,6 +25,45 @@ public class Bullet extends MovableEntity {
 
     }
 
+    public void destroy() {
+        GameController.getInstance().getBullets().remove(this);
+        isDestroyed = true;
+    }
+
+    @Override
+    public void draw(GraphicsContext gc) {
+        if (isDestroyed) {
+            return;
+        }
+        gc.setFill(Color.WHITE);
+        gc.fillRect(x - width / 2, y - height / 2, width, height);
+
+    }
+
+    private void hitCheck() {
+        for (Tank tank : GameController.getInstance().getTanks()) {
+            if (tank.isPlayerSide() == isPlayerSide) {
+                continue;
+            }
+            if (GameUtil.isCollided(tank, this)) {
+                tank.hit();
+                new BulletHitParticle(getX(), getY());
+                GameController.getInstance().getBullets().remove(this);
+                return;
+            }
+        }
+        for (Wall wall : GameController.getInstance().getWalls()) {
+            if (GameUtil.isCollided(wall, this)) {
+                if (wall instanceof BreakableWall) {
+                    ((BreakableWall) wall).hit();
+                }
+                new BulletHitParticle(getX(), getY());
+                GameController.getInstance().getBullets().remove(this);
+                return;
+            }
+        }
+    }
+
     public boolean isPlayerSide() {
         return isPlayerSide;
     }
@@ -57,45 +96,6 @@ public class Bullet extends MovableEntity {
         }
 
 
-    }
-
-    @Override
-    public void draw(GraphicsContext gc) {
-        if (isDestroyed) {
-            return;
-        }
-        gc.setFill(Color.WHITE);
-        gc.fillRect(x - width / 2, y - height / 2, width, height);
-
-    }
-
-    public void destroy() {
-        GameController.getInstance().getBullets().remove(this);
-        isDestroyed = true;
-    }
-
-    private void hitCheck() {
-        for (Tank tank : GameController.getInstance().getTanks()) {
-            if (tank.isPlayerSide() == isPlayerSide) {
-                continue;
-            }
-            if (GameUtil.isCollided(tank, this)) {
-                tank.hit();
-                new BulletHitParticle(getX(), getY());
-                GameController.getInstance().getBullets().remove(this);
-                return;
-            }
-        }
-        for (Wall wall : GameController.getInstance().getWalls()) {
-            if (GameUtil.isCollided(wall, this)) {
-                if (wall instanceof BreakableWall) {
-                    ((BreakableWall) wall).hit();
-                }
-                new BulletHitParticle(getX(), getY());
-                GameController.getInstance().getBullets().remove(this);
-                return;
-            }
-        }
     }
 
 }

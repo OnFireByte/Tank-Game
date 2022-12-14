@@ -22,7 +22,6 @@ public class Wall extends BaseEntity {
     }
 
     @Override
-    public void update() {
-    }
+    public void update() {}
 
 }

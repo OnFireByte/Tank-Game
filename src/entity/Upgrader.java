@@ -10,6 +10,10 @@ public class Upgrader extends BaseEntity {
     private int expireTime;
     private int expireCounter;
 
+    public Upgrader(float x, float y) {
+        this(x, y, 60 * 10);
+    }
+
     public Upgrader(float x, float y, int expireTime) {
         super(20, 20, x, y);
         this.expireTime = expireTime;
@@ -17,8 +21,8 @@ public class Upgrader extends BaseEntity {
         GameController.getInstance().getUpgraders().add(this);
     }
 
-    public Upgrader(float x, float y) {
-        this(x, y, 60 * 10);
+    public void decreaseExpireCounter() {
+        setExpireCounter(expireCounter - 1);
     }
 
     @Override
@@ -26,29 +30,16 @@ public class Upgrader extends BaseEntity {
         gc.drawImage(RenderableHolder.upgrade, x - width / 2, y - height / 2, width, height);
     }
 
-    @Override
-    public void update() {
-        if (isExpired()) {
-            GameController.getInstance().getUpgraders().remove(this);
-            return;
-        }
-        decreaseExpireCounter();
-    }
-
-    public boolean isExpired() {
-        return expireCounter <= 0;
+    public int getExpireCounter() {
+        return expireCounter;
     }
 
     public int getExpireTime() {
         return expireTime;
     }
 
-    public void setExpireTime(int expireTime) {
-        this.expireTime = expireTime;
-    }
-
-    public int getExpireCounter() {
-        return expireCounter;
+    public boolean isExpired() {
+        return expireCounter <= 0;
     }
 
     public void setExpireCounter(int expireCounter) {
@@ -58,7 +49,16 @@ public class Upgrader extends BaseEntity {
         this.expireCounter = expireCounter;
     }
 
-    public void decreaseExpireCounter() {
-        setExpireCounter(expireCounter - 1);
+    public void setExpireTime(int expireTime) {
+        this.expireTime = expireTime;
+    }
+
+    @Override
+    public void update() {
+        if (isExpired()) {
+            GameController.getInstance().getUpgraders().remove(this);
+            return;
+        }
+        decreaseExpireCounter();
     }
 }

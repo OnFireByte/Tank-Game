@@ -24,9 +24,111 @@ public class PlayerTank extends Tank {
         setSizeLevel(0);
     }
 
+    public void addMaxHpLevel(int level) {
+        setMaxHpLevel(maxHpLevel + level);
+    }
+
+    public void addShootCoolDownLevel(int level) {
+        setShootCoolDownLevel(shootCoolDownLevel + level);
+    }
+
+    public void addSizeLevel(int level) {
+        setSizeLevel(sizeLevel + level);
+    }
+
+    public void addSpeedLevel(int level) {
+        setSpeedLevel(speedLevel + level);
+    }
+
+    public int getMaxHpLevel() {
+        return maxHpLevel;
+    }
+
     @Override
     protected Direction getNextDirection() {
         return InputUtil.getPlayerKeyDirection();
+    }
+
+    public int getShootCoolDownLevel() {
+        return shootCoolDownLevel;
+    }
+
+    public int getSizeLevel() {
+        return sizeLevel;
+    }
+
+    public int getSpeedLevel() {
+        return speedLevel;
+    }
+
+    public void heal() {
+        hp = maxHp;
+    }
+
+    @Override
+    public void hit() {
+        // Invincible frame
+        if (hitCounter > 0) {
+            return;
+        }
+        super.hit();
+    }
+
+    @Override
+    public void kill() {
+        super.kill();
+        GameController.setGameOver(true);
+        SceneManager.getInstance().openEndGameModal();
+    }
+
+    public void setMaxHpLevel(int level) {
+        if (level < 0)
+            level = 0;
+        if (level > Constant.MAX_UPGRADE_LEVEL)
+            level = Constant.MAX_UPGRADE_LEVEL;
+        this.maxHpLevel = level;
+
+        int newMaxHp = Constant.PLAYER_TANK_MAX_HP_LEVEL.get(level);
+        int diff = newMaxHp - maxHp;
+        maxHp = newMaxHp;
+        hp += diff;
+    }
+
+    public void setShootCoolDownLevel(int level) {
+        if (level < 0)
+            level = 0;
+        if (level > Constant.MAX_UPGRADE_LEVEL)
+            level = Constant.MAX_UPGRADE_LEVEL;
+        this.shootCoolDownLevel = level;
+        shootCoolDown = Constant.PLAYER_TANK_SHOOT_COOLDOWN_LEVEL.get(level);
+    }
+
+    public void setSizeLevel(int level) {
+        if (level < 0)
+            level = 0;
+        if (level > Constant.MAX_UPGRADE_LEVEL)
+            level = Constant.MAX_UPGRADE_LEVEL;
+        this.sizeLevel = level;
+        width = Constant.PLAYER_TANK_SIZE_LEVEL.get(level);
+        height = Constant.PLAYER_TANK_SIZE_LEVEL.get(level);
+    }
+
+    public void setSpeedLevel(int level) {
+        if (level < 0)
+            level = 0;
+        if (level > Constant.MAX_UPGRADE_LEVEL)
+            level = Constant.MAX_UPGRADE_LEVEL;
+        this.speedLevel = level;
+        speed = Constant.PLAYER_TANK_SPEED_LEVEL.get(level);
+    }
+
+    @Override
+    public void shoot() {
+        if (shootCoolDownCounter > 0) {
+            return;
+        }
+        RenderableHolder.ShootSound.play();
+        super.shoot();
     }
 
     @Override
@@ -50,107 +152,5 @@ public class PlayerTank extends Tank {
     private void upgrade() {
         SceneManager.getInstance().openUpgradeModal();
 
-    }
-
-    @Override
-    public void hit() {
-        // Invincible frame
-        if (hitCounter > 0) {
-            return;
-        }
-        super.hit();
-    }
-
-    @Override
-    public void kill() {
-        super.kill();
-        GameController.setGameOver(true);
-        SceneManager.getInstance().openEndGameModal();
-    }
-
-    public int getMaxHpLevel() {
-        return maxHpLevel;
-    }
-
-    public void setMaxHpLevel(int level) {
-        if (level < 0)
-            level = 0;
-        if (level > Constant.MAX_UPGRADE_LEVEL)
-            level = Constant.MAX_UPGRADE_LEVEL;
-        this.maxHpLevel = level;
-
-        int newMaxHp = Constant.PLAYER_TANK_MAX_HP_LEVEL.get(level);
-        int diff = newMaxHp - maxHp;
-        maxHp = newMaxHp;
-        hp += diff;
-    }
-
-    public void addMaxHpLevel(int level) {
-        setMaxHpLevel(maxHpLevel + level);
-    }
-
-    public int getSpeedLevel() {
-        return speedLevel;
-    }
-
-    public void setSpeedLevel(int level) {
-        if (level < 0)
-            level = 0;
-        if (level > Constant.MAX_UPGRADE_LEVEL)
-            level = Constant.MAX_UPGRADE_LEVEL;
-        this.speedLevel = level;
-        speed = Constant.PLAYER_TANK_SPEED_LEVEL.get(level);
-    }
-
-    public void addSpeedLevel(int level) {
-        setSpeedLevel(speedLevel + level);
-    }
-
-    public int getShootCoolDownLevel() {
-        return shootCoolDownLevel;
-    }
-
-    public void setShootCoolDownLevel(int level) {
-        if (level < 0)
-            level = 0;
-        if (level > Constant.MAX_UPGRADE_LEVEL)
-            level = Constant.MAX_UPGRADE_LEVEL;
-        this.shootCoolDownLevel = level;
-        shootCoolDown = Constant.PLAYER_TANK_SHOOT_COOLDOWN_LEVEL.get(level);
-    }
-
-    public void addShootCoolDownLevel(int level) {
-        setShootCoolDownLevel(shootCoolDownLevel + level);
-    }
-
-    public int getSizeLevel() {
-        return sizeLevel;
-    }
-
-    public void setSizeLevel(int level) {
-        if (level < 0)
-            level = 0;
-        if (level > Constant.MAX_UPGRADE_LEVEL)
-            level = Constant.MAX_UPGRADE_LEVEL;
-        this.sizeLevel = level;
-        width = Constant.PLAYER_TANK_SIZE_LEVEL.get(level);
-        height = Constant.PLAYER_TANK_SIZE_LEVEL.get(level);
-    }
-
-    public void addSizeLevel(int level) {
-        setSizeLevel(sizeLevel + level);
-    }
-
-    public void heal() {
-        hp = maxHp;
-    }
-
-    @Override
-    public void shoot() {
-        if (shootCoolDownCounter > 0) {
-            return;
-        }
-        RenderableHolder.ShootSound.play();
-        super.shoot();
     }
 }

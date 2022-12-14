@@ -60,22 +60,65 @@ public class RenderableHolder {
 
 	public static Font buttonFont;
 
-	// -------------------------------------------------------------------------------------------------------------------------------//
-	public RenderableHolder() {
+	static {
+		loadResource();
+		mainGameMusic.setOnEndOfMedia(new Runnable() {
+			@Override
+			public void run() {
+				mainGameMusic.seek(Duration.ZERO);
+			}
+		});
+		mainGameMusic.setVolume(0.4);
+	}
+
+	public static ImageView getButton(double w, double h) {
+		return new ImageView(
+				new Image(ClassLoader.getSystemResource("images/Button.png").toString(), w, h, false, false));
+	}
+
+	public static ImageView getButtonPressed(double w, double h) {
+		return new ImageView(
+				new Image(ClassLoader.getSystemResource("images/ButtonPressed.png").toString(), w, h, false, false));
+	}
+
+	public static Font getFont(double size) {
+		return Font.loadFont(ClassLoader.getSystemResource("font/8bit.ttf").toString(), size);
 	}
 
 	public static RenderableHolder getInstance() {
 		return instance;
 	}
 
-	static {
-		loadResource();
-		mainGameMusic.setOnEndOfMedia(new Runnable() {
-			public void run() {
-				mainGameMusic.seek(Duration.ZERO);
-			}
-		});
-		mainGameMusic.setVolume(0.4);
+	public static Image getMap(int idx) {
+		switch (idx) {
+			case 1:
+				return map1;
+			case 2:
+				return map2;
+			case 3:
+				return map3;
+			default:
+				return map1;
+		}
+	}
+
+	public static Image getMapPreview(int idx) {
+		switch (idx) {
+			case 1:
+				return map1Preview;
+			case 2:
+				return map2Preview;
+			case 3:
+				return map3Preview;
+			default:
+				return map1Preview;
+		}
+	}
+
+	public static Image loadNewTankExplosion() {
+		// Need to load new Image because they aren't restart.
+		return new Image(ClassLoader.getSystemResource("images/explosion.gif").toString());
+
 	}
 
 	public static void loadResource() {
@@ -135,49 +178,7 @@ public class RenderableHolder {
 
 	}
 
-	public static Font getFont(double size) {
-		return Font.loadFont(ClassLoader.getSystemResource("font/8bit.ttf").toString(), size);
-	}
-
-	public static ImageView getButton(double w, double h) {
-		return new ImageView(
-				new Image(ClassLoader.getSystemResource("images/Button.png").toString(), w, h, false, false));
-	}
-
-	public static ImageView getButtonPressed(double w, double h) {
-		return new ImageView(
-				new Image(ClassLoader.getSystemResource("images/ButtonPressed.png").toString(), w, h, false, false));
-	}
-
-	public static Image loadNewTankExplosion() {
-		// Need to load new Image because they aren't restart.
-		return new Image(ClassLoader.getSystemResource("images/explosion.gif").toString());
-
-	}
-
-	public static Image getMap(int idx) {
-		switch (idx) {
-			case 1:
-				return map1;
-			case 2:
-				return map2;
-			case 3:
-				return map3;
-			default:
-				return map1;
-		}
-	}
-
-	public static Image getMapPreview(int idx) {
-		switch (idx) {
-			case 1:
-				return map1Preview;
-			case 2:
-				return map2Preview;
-			case 3:
-				return map3Preview;
-			default:
-				return map1Preview;
-		}
+	// -------------------------------------------------------------------------------------------------------------------------------//
+	public RenderableHolder() {
 	}
 }

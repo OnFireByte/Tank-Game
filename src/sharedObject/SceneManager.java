@@ -10,8 +10,19 @@ public class SceneManager {
     private static SceneManager instance;
     private static Stage primaryStage;
 
+    static public SceneManager getInstance() {
+        if (instance == null) {
+            instance = new SceneManager();
+        }
+        return instance;
+    }
+    static public void injectStage(Stage primaryStage) {
+        SceneManager.primaryStage = primaryStage;
+    }
     private MainMenuScene mainMenuScene;
+
     private MainGameScene mainGameScene;
+
     private MapSelectionScene mapSelectionScene;
 
     public SceneManager() {
@@ -20,38 +31,36 @@ public class SceneManager {
         mapSelectionScene = new MapSelectionScene();
     }
 
-    static public void injectStage(Stage primaryStage) {
-        SceneManager.primaryStage = primaryStage;
-    }
+    public void closeUpgradeModal() {
+        mainGameScene.closeUpgradeModal();
 
-    static public SceneManager getInstance() {
-        if (instance == null) {
-            instance = new SceneManager();
-        }
-        return instance;
-    }
-
-    public MainMenuScene getMainMenuScene() {
-        return mainMenuScene;
     }
 
     public MainGameScene getMainGameScene() {
         return mainGameScene;
     }
 
+    public MainMenuScene getMainMenuScene() {
+        return mainMenuScene;
+    }
+
     public MapSelectionScene getMapSelectionScene() {
         return mapSelectionScene;
     }
 
-    public void setMapSelectionScene(MapSelectionScene mapSelectionScene) {
-        this.mapSelectionScene = mapSelectionScene;
+    public void openEndGameModal() {
+        mainGameScene.openEndGameModal();
+        RenderableHolder.gameOverSound.play();
     }
 
-    public void setToMainMenu() {
-        primaryStage.setScene(mainMenuScene);
-        GameController.getInstance().setGameRunning(false);
+    public void openUpgradeModal() {
+        mainGameScene.openUpgradeModal();
+        RenderableHolder.upgradeSound.play();
 
-        mainMenuScene.startMusic();
+    }
+
+    public void setMapSelectionScene(MapSelectionScene mapSelectionScene) {
+        this.mapSelectionScene = mapSelectionScene;
     }
 
     public void setToMainGame() {
@@ -62,25 +71,16 @@ public class SceneManager {
 
     }
 
+    public void setToMainMenu() {
+        primaryStage.setScene(mainMenuScene);
+        GameController.getInstance().setGameRunning(false);
+
+        mainMenuScene.startMusic();
+    }
+
     public void setToMapSelection() {
         primaryStage.setScene(mapSelectionScene);
         GameController.getInstance().setGameRunning(false);
-    }
-
-    public void openUpgradeModal() {
-        mainGameScene.openUpgradeModal();
-        RenderableHolder.upgradeSound.play();
-
-    }
-
-    public void closeUpgradeModal() {
-        mainGameScene.closeUpgradeModal();
-
-    }
-
-    public void openEndGameModal() {
-        mainGameScene.openEndGameModal();
-        RenderableHolder.gameOverSound.play();
     }
 
 }

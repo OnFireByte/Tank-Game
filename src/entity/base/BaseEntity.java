@@ -18,42 +18,42 @@ public abstract class BaseEntity implements Updatable {
         visible = true;
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
+    public abstract void draw(GraphicsContext gc);
 
     public int getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
+    public int getWidth() {
+        return width;
     }
 
     public float getX() {
         return x;
     }
 
-    public void setX(float x) {
-        this.x = x;
-    }
-
     public float getY() {
         return y;
     }
 
-    public void setY(float y) {
-        this.y = y;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
 
-    public abstract void draw(GraphicsContext gc);
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
 
 }

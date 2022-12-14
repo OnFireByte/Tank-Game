@@ -49,7 +49,7 @@ public class MapSelectionScene extends Scene {
        all.setAlignment(Pos.TOP_CENTER);
        all.setPadding(new Insets(40));
        all.setSpacing(130);
-       
+
        Button txt = new Button("Map Select");
        txt.setFont(RenderableHolder.getFont(40));
        ImageView t = new ImageView(RenderableHolder.txtFrame);
@@ -57,7 +57,7 @@ public class MapSelectionScene extends Scene {
        txt.setPadding(Insets.EMPTY);
        txt.setContentDisplay(ContentDisplay.CENTER);
        txt.setGraphic(t);
-       
+
        BaseButton back = new BaseButton("Back");
        back.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override

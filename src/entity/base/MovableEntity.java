@@ -12,8 +12,16 @@ public abstract class MovableEntity extends BaseEntity {
         this.direction = direction;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
     public float getSpeed() {
         return speed;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 
     public void setSpeed(float speed) {
@@ -21,14 +29,6 @@ public abstract class MovableEntity extends BaseEntity {
             speed = 0;
         }
         this.speed = speed;
-    }
-
-    public Direction getDirection() {
-        return direction;
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
     }
 
 }

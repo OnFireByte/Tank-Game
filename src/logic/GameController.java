@@ -20,7 +20,44 @@ public class GameController {
     private static int maxEnemy;
     private static int playerScore;
     private static boolean isGameOver;
+    public static void addPlayerScore(int score) {
+        setPlayerScore(getPlayerScore() + score);
+    }
+    public static GameController getInstance() {
+        if (instance == null) {
+            instance = new GameController();
+        }
+        return instance;
+    }
+
+    public static int getMaxEnemy() {
+        return maxEnemy;
+    }
+
+    public static int getPlayerScore() {
+        return playerScore;
+    }
+
+    public static boolean isGameOver() {
+        return isGameOver;
+    }
+    public static void setGameOver(boolean isGameOver) {
+        GameController.isGameOver = isGameOver;
+    }
+    public static void setMaxEnemy(int maxEnemy) {
+        GameController.maxEnemy = maxEnemy;
+    }
+    public static void setPlayerScore(int playerScore) {
+        if (playerScore < 0) {
+            playerScore = 0;
+        }
+
+        GameController.playerScore = playerScore;
+
+    }
+
     private int currentMapId;
+
     private long timeFrame;
 
     private GraphicsContext gc;
@@ -28,8 +65,11 @@ public class GameController {
     private ConcurrentLinkedQueue<Tank> tanks = new ConcurrentLinkedQueue<>();
 
     private ConcurrentLinkedQueue<Bullet> bullets = new ConcurrentLinkedQueue<>();
+
     private ConcurrentLinkedQueue<Wall> walls = new ConcurrentLinkedQueue<>();
+
     private ConcurrentLinkedQueue<Upgrader> upgraders = new ConcurrentLinkedQueue<>();
+
     private ConcurrentLinkedQueue<Particle> particles = new ConcurrentLinkedQueue<>();
 
     private PlayerTank player;
@@ -44,52 +84,40 @@ public class GameController {
         timeFrame = 0;
     }
 
-    public static int getMaxEnemy() {
-        return maxEnemy;
-    }
-
-    public static void setMaxEnemy(int maxEnemy) {
-        GameController.maxEnemy = maxEnemy;
-    }
-
-    public static GameController getInstance() {
-        if (instance == null) {
-            instance = new GameController();
+    public void drawFrame() {
+        if (!isGameRunning) {
+            return;
         }
-        return instance;
-    }
-
-    public static int getPlayerScore() {
-        return playerScore;
-    }
-
-    public static void setPlayerScore(int playerScore) {
-        if (playerScore < 0) {
-            playerScore = 0;
+        // Clear screen for redrawing
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0, 0, Constant.GAME_WIDTH, Constant.GAME_HEIGHT);
+        for (Upgrader upgrader : upgraders) {
+            upgrader.draw(getGC());
         }
-
-        GameController.playerScore = playerScore;
-
-    }
-
-    public static void addPlayerScore(int score) {
-        setPlayerScore(getPlayerScore() + score);
-    }
-
-    public ConcurrentLinkedQueue<Wall> getWalls() {
-        return walls;
-    }
-
-    public ConcurrentLinkedQueue<Tank> getTanks() {
-        return tanks;
+        for (Tank tank : tanks) {
+            tank.draw(getGC());
+        }
+        for (Bullet bullet : bullets) {
+            bullet.draw(getGC());
+        }
+        for (Wall wall : walls) {
+            wall.draw(getGC());
+        }
+        for (Particle particle : particles) {
+            particle.draw(getGC());
+        }
     }
 
     public ConcurrentLinkedQueue<Bullet> getBullets() {
         return bullets;
     }
 
-    public ConcurrentLinkedQueue<Upgrader> getUpgraders() {
-        return upgraders;
+    public int getCurrentMapId() {
+        return currentMapId;
+    }
+
+    public GraphicsContext getGC() {
+        return gc;
     }
 
     public ConcurrentLinkedQueue<Particle> getParticles() {
@@ -100,20 +128,47 @@ public class GameController {
         return player;
     }
 
-    public void setPlayer(PlayerTank player) {
-        this.player = player;
+    public ConcurrentLinkedQueue<Tank> getTanks() {
+        return tanks;
+    }
+
+    public double getTimeFrame() {
+        return timeFrame;
+    }
+
+    public ConcurrentLinkedQueue<Upgrader> getUpgraders() {
+        return upgraders;
+    }
+
+    public ConcurrentLinkedQueue<Wall> getWalls() {
+        return walls;
+    }
+
+    public void initialize() {
+        // Create border walls
+        isGameOver = false;
+        for (int i = 0; i < 24; i++) {
+            new Wall(12.5f, i * 25 + 12.5f, 25);
+            new Wall(Constant.GAME_WIDTH - 12.5f, i * 25 + 12.5f, 25);
+        }
+        for (int i = 0; i < 40; i++) {
+            new Wall(i * 25 + 12.5f, 12.5f, 25);
+            new Wall(i * 25 + 12.5f, Constant.GAME_HEIGHT - 12.5f, 25);
+        }
+
+        // Load map
+        GameUtil.mapLoader(currentMapId);
+
+        // Populate player and enemies
+        player = GameUtil.spawnPlayerToRandomPos();
+        for (int i = 0; i < 5; i++) {
+            GameUtil.spawnEnemy();
+        }
+
     }
 
     public boolean isGameRunning() {
         return isGameRunning;
-    }
-
-    public void toggleGameRunning() {
-        isGameRunning = !isGameRunning;
-    }
-
-    public void setGameRunning(boolean isGameRunning) {
-        this.isGameRunning = isGameRunning;
     }
 
     public void nextFrame() {
@@ -149,38 +204,6 @@ public class GameController {
         });
     }
 
-    public void drawFrame() {
-        if (!isGameRunning) {
-            return;
-        }
-        // Clear screen for redrawing
-        gc.setFill(Color.BLACK);
-        gc.fillRect(0, 0, Constant.GAME_WIDTH, Constant.GAME_HEIGHT);
-        for (Upgrader upgrader : upgraders) {
-            upgrader.draw(getGC());
-        }
-        for (Tank tank : tanks) {
-            tank.draw(getGC());
-        }
-        for (Bullet bullet : bullets) {
-            bullet.draw(getGC());
-        }
-        for (Wall wall : walls) {
-            wall.draw(getGC());
-        }
-        for (Particle particle : particles) {
-            particle.draw(getGC());
-        }
-    }
-
-    public void setGC(GraphicsContext gc) {
-        this.gc = gc;
-    }
-
-    public GraphicsContext getGC() {
-        return gc;
-    }
-
     public void reset() {
         tanks.clear();
         bullets.clear();
@@ -193,47 +216,24 @@ public class GameController {
         RenderableHolder.mainGameMusic.seek(Duration.ZERO);
     }
 
-    public void initialize() {
-        // Create border walls
-        isGameOver = false;
-        for (int i = 0; i < 24; i++) {
-            new Wall(12.5f, i * 25 + 12.5f, 25);
-            new Wall(Constant.GAME_WIDTH - 12.5f, i * 25 + 12.5f, 25);
-        }
-        for (int i = 0; i < 40; i++) {
-            new Wall(i * 25 + 12.5f, 12.5f, 25);
-            new Wall(i * 25 + 12.5f, Constant.GAME_HEIGHT - 12.5f, 25);
-        }
-
-        // Load map
-        GameUtil.mapLoader(currentMapId);
-
-        // Populate player and enemies
-        player = GameUtil.spawnPlayerToRandomPos();
-        for (int i = 0; i < 5; i++) {
-            GameUtil.spawnEnemy();
-        }
-
-    }
-
-    public static boolean isGameOver() {
-        return isGameOver;
-    }
-
-    public static void setGameOver(boolean isGameOver) {
-        GameController.isGameOver = isGameOver;
-    }
-
-    public int getCurrentMapId() {
-        return currentMapId;
-    }
-
     public void setCurrentMapId(int currentMapId) {
         this.currentMapId = currentMapId;
     }
 
-    public double getTimeFrame() {
-        return timeFrame;
+    public void setGameRunning(boolean isGameRunning) {
+        this.isGameRunning = isGameRunning;
+    }
+
+    public void setGC(GraphicsContext gc) {
+        this.gc = gc;
+    }
+
+    public void setPlayer(PlayerTank player) {
+        this.player = player;
+    }
+
+    public void toggleGameRunning() {
+        isGameRunning = !isGameRunning;
     }
 
 }

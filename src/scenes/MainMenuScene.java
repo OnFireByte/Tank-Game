@@ -12,8 +12,8 @@ import sharedObject.RenderableHolder;
 
 public class MainMenuScene extends Scene {
 
-	private StackPane root;
 	private static AnimationTimer mainMenuMusic;
+	private StackPane root;
 
 	public MainMenuScene() {
 

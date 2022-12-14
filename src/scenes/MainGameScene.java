@@ -9,7 +9,6 @@ import gui.mainGame.GameMenu;
 import gui.mainGame.PauseModal;
 import gui.mainGame.UpgradeModal;
 import javafx.animation.AnimationTimer;
-
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -88,12 +87,6 @@ public class MainGameScene extends Scene {
 
 	}
 
-	public void openUpgradeModal() {
-		upgradeModal.setVisible(true);
-		GameController.getInstance().setGameRunning(false);
-
-	}
-
 	public void closeUpgradeModal() {
 		upgradeModal.setVisible(false);
 		GameController.getInstance().setGameRunning(true);
@@ -102,6 +95,12 @@ public class MainGameScene extends Scene {
 	public void openEndGameModal() {
 		endGameModal.setVisible(true);
 		GameController.getInstance().setGameRunning(false);
+	}
+
+	public void openUpgradeModal() {
+		upgradeModal.setVisible(true);
+		GameController.getInstance().setGameRunning(false);
+
 	}
 
 }

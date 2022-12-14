@@ -36,26 +36,6 @@ public class BotTank extends Tank {
 
     }
 
-    public boolean isAlive() {
-        return isAlive;
-    }
-
-    public void setAlive(boolean isAlive) {
-        this.isAlive = isAlive;
-    }
-
-    @Override
-    protected boolean shootInput() {
-
-        return ThreadLocalRandom.current().nextInt(0, 200) == 0;
-    }
-
-    @Override
-    protected void unforward() {
-        super.unforward();
-        isBlocked = true;
-    }
-
     private void calculateNextDirection() {
         if (calculateNextDirectionCoolDownCounter > 0 && !isBlocked) {
             return;
@@ -84,19 +64,12 @@ public class BotTank extends Tank {
     }
 
     @Override
-    public void update() {
-        calculateNextDirection();
-
-        if (calculateNextDirectionCoolDownCounter > 0) {
-            calculateNextDirectionCoolDownCounter--;
-        }
-
-        super.update();
-    }
-
-    @Override
     protected Direction getNextDirection() {
         return direction;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
     }
 
     @Override
@@ -107,6 +80,33 @@ public class BotTank extends Tank {
         }
 
         super.kill();
+    }
+
+    public void setAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
+
+    @Override
+    protected boolean shootInput() {
+
+        return ThreadLocalRandom.current().nextInt(0, 200) == 0;
+    }
+
+    @Override
+    protected void unforward() {
+        super.unforward();
+        isBlocked = true;
+    }
+
+    @Override
+    public void update() {
+        calculateNextDirection();
+
+        if (calculateNextDirectionCoolDownCounter > 0) {
+            calculateNextDirectionCoolDownCounter--;
+        }
+
+        super.update();
     }
 
 }

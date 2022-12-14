@@ -11,19 +11,19 @@ import javafx.scene.layout.StackPane;
 import sharedObject.RenderableHolder;
 
 public class HelpPane extends StackPane{
-	
+
 	private boolean isShowed;
-	
+
 
 	public HelpPane() {
 		super(new ImageView(RenderableHolder.test));
 		this.setMaxSize(700, 500);
 		this.setTranslateX(1000);
 		this.isShowed = false;
-		
+
 		HBox closeButtonPane = new HBox();
 		closeButtonPane.setPadding(new Insets(50, 200, 0, 700));
-	
+
 		//---------------------------close button-----------------------------------------------------------------------------------------
 		BaseButton btn = new BaseButton("X" , 40 , 40);
 		btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -35,13 +35,13 @@ public class HelpPane extends StackPane{
 			}
 		});
 		//--------------------------------------------------------------------------------------------------------------------------------
-		
+
 		closeButtonPane.getChildren().add(btn);
 		this.getChildren().add(closeButtonPane);
-		
+
 	}
-	
-	
+
+
 	public void showHelpPane() {
 		TranslateTransition transition = new TranslateTransition();
 		transition.setNode(this);
@@ -55,7 +55,7 @@ public class HelpPane extends StackPane{
 		}
 		transition.play();
 	}
-	
-	
+
+
 
 }
