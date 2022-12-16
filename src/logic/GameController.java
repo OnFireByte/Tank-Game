@@ -20,9 +20,11 @@ public class GameController {
     private static int maxEnemy;
     private static int playerScore;
     private static boolean isGameOver;
+
     public static void addPlayerScore(int score) {
         setPlayerScore(getPlayerScore() + score);
     }
+
     public static GameController getInstance() {
         if (instance == null) {
             instance = new GameController();
@@ -41,12 +43,15 @@ public class GameController {
     public static boolean isGameOver() {
         return isGameOver;
     }
+
     public static void setGameOver(boolean isGameOver) {
         GameController.isGameOver = isGameOver;
     }
+
     public static void setMaxEnemy(int maxEnemy) {
         GameController.maxEnemy = maxEnemy;
     }
+
     public static void setPlayerScore(int playerScore) {
         if (playerScore < 0) {
             playerScore = 0;
@@ -167,12 +172,12 @@ public class GameController {
 
     }
 
-    public boolean isGameRunning() {
+    public synchronized boolean isGameRunning() {
         return isGameRunning;
     }
 
     public void nextFrame() {
-        if (!isGameRunning) {
+        if (!isGameRunning()) {
             return;
         }
         timeFrame++;
@@ -220,7 +225,7 @@ public class GameController {
         this.currentMapId = currentMapId;
     }
 
-    public void setGameRunning(boolean isGameRunning) {
+    public synchronized void setGameRunning(boolean isGameRunning) {
         this.isGameRunning = isGameRunning;
     }
 
